@@ -5,8 +5,12 @@ import Link from "next/link";
 export default function Navbar() {
     const {resolvedTheme, setTheme} = useTheme()
     return (
-        <div className="m-auto p-5 flex flex-row md:flex-col md:h-screen md:w-1/6 w-full Navbar border border-amber-100">
-            <h1 className="m-auto leading-tight h-full text-6xl"><Link href={"/"} >💻</Link></h1>
+        <div className="m-auto p-5 flex flex-row md:flex-col md:h-screen md:w-1/6 Navbar bg-gradient-to-r shadow-lg rounded-xl">
+            <h1 className="m-auto leading-tight h-full text-6xl font-bold  text-center">
+                
+                    <Link href={"/"} >💻Home</Link>
+
+            </h1>
             <Link href={"/about"} className={"text-balance font-bold text-2xl m-auto p-5"} >About</Link>
             <Link href={"/projects"} className={"text-balance font-bold text-2xl m-auto p-5"} >Projects</Link>
             <Link href={"/contact"} className={"text-balance font-bold text-2xl m-auto p-5"}>Socials</Link>

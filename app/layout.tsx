@@ -36,7 +36,7 @@ export default function RootLayout({
         className={`${helvetica.variable}, antialiased`}
       >
       <ThemeProvider defaultTheme="system" attribute="class" enableSystem >
-        <div className="flex md:flex-row flex-col min-h-screen transition-colors ease-in-out">
+        <div className="flex md:flex-row flex-col min-h-screen transition-colors ease-in-out w-full overflow-clip">
           <Navbar/>
           {children}
         </div>
