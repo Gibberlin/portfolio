@@ -3,7 +3,7 @@ export default function About() {
     <div className="min-h-screen flex md:flex-row flex-col md:p-10 w-full">
       <div className="max-w-4xl justify-center align-middle m-auto">
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8 ">
-          <h1 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center text-bold">
             About Me
           </h1>
           
@@ -21,7 +21,7 @@ export default function About() {
           </div>
 
           <div className="mt-12">
-            <h2 className="text-2xl font-semibold mb-6 text-blue-500">Technical Skills</h2>
+            <h2 className="text-2xl font-semibold mb-6 text-semibold">Technical Skills</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               <div className="p-4 bg-gray-100 dark:bg-gray-700 rounded-lg">
                 <h3 className="font-semibold mb-2">Programming Languages</h3>
