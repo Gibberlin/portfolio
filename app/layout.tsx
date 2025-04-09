@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/app/navbar";
 import {ThemeProvider} from "next-themes";
 import {Silkscreen} from "next/font/google"
+import { Analytics } from "@vercel/analytics/react"
 
 const silkscreen = Silkscreen({
   weight: "400",
@@ -49,6 +50,7 @@ export default function RootLayout({
         </div>
       </ThemeProvider>
       </body>
+      <Analytics />
     </html>
   );
 }
