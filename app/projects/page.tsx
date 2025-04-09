@@ -21,7 +21,7 @@ export default function Projects() {
   const [filter, setFilter] = useState('all')
   const [sortBy, setSortBy] = useState('updated')
   const [searchQuery, setSearchQuery] = useState('')
-  const [showForks, setShowForks] = useState(false)
+  const [showForks, setShowForks] = useState(true)
 
   useEffect(() => {
     const fetchRepos = async () => {
@@ -86,7 +86,7 @@ export default function Projects() {
                 placeholder="Search projects..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full md:w-64 px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full md:w-64 px-4 py-2 rounded-lg bg-gray-100 dark:bg-green-900 text-gray-900 dark:text-green-100 focus:outline-none focus:ring-2 focus:ring-green-500"
               />
             </div>
 
@@ -94,7 +94,7 @@ export default function Projects() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="px-4 py-2 rounded-lg bg-green-100 dark:bg-green-900 text-gray-700 dark:text-green-100 focus:outline-none focus:ring-2 focus:ring-green-500"
               >
                 <option value="updated">Recently Updated</option>
                 <option value="created">Recently Created</option>
@@ -105,7 +105,7 @@ export default function Projects() {
                   type="checkbox"
                   checked={showForks}
                   onChange={(e) => setShowForks(e.target.checked)}
-                  className="rounded text-blue-500 focus:ring-blue-500"
+                  className="rounded text-green-500 focus:ring-green-500"
                 />
                 Show Forks
               </label>
@@ -118,7 +118,7 @@ export default function Projects() {
               onClick={() => setFilter('all')}
               className={`px-4 py-2 rounded-lg transition-colors ${
                 filter === 'all'
-                  ? 'bg-blue-500 text-white'
+                  ? 'bg-green-500 text-white'
                   : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
@@ -130,7 +130,7 @@ export default function Projects() {
                 onClick={() => setFilter(lang)}
                 className={`px-4 py-2 rounded-lg transition-colors ${
                   filter === lang
-                    ? 'bg-blue-500 text-white'
+                    ? 'bg-green-500 text-white'
                     : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
@@ -179,7 +179,7 @@ export default function Projects() {
                   {repo.topics.slice(0, 3).map((topic) => (
                     <span
                       key={topic}
-                      className="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 rounded-full"
+                      className="px-2 py-1 text-xs bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100 rounded-full"
                     >
                       {topic}
                     </span>

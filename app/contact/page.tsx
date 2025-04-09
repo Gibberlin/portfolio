@@ -3,8 +3,8 @@
 
 export default function SocialsPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 dark:bg-[#030303] py-12 px-4 sm:px-6 lg:px-8 w-full">
-      <div className="max-w-3xl mx-auto p-5">
+    <div className="min-h-screen  dark:bg-[#030303] py-12 px-4 sm:px-6 lg:px-8 w-full">
+      <div className="max-w-3xl mx-auto p-5 border-2 border-gray-300 rounded-lg">
         <h1 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">
           Let&apos;s Connect!
         </h1>

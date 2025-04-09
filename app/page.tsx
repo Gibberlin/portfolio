@@ -1,12 +1,13 @@
 import Image from "next/image";
+import Type from "@/app/components/type";
 
 export default function Home() {
     const images = "/images/this-one.jpg";
   return (
       <div id ="Main" className="h-screen pt-40 w-full ease-in transition-colors">
           <div className={`flex flex-col w-full md:flex-row flex-wrap md:pl-5`}>
-              <h1 className={"w-full text-5xl flex-grow p-5 mb-9 font-bold font-Arial"}>Syed Yashin Hussian</h1>
-              <p className="max-w-prose italic p-5 md:text-2xl">&ldquo;Oh hey! I&apos;m Syed Yashin Hussain.
+              <Type />
+              <p className="max-w-prose italic p-5 md:text-2xl">&ldquo;Oh hey! I&apos;m <h1>Syed Yashin Hussain</h1>.
                   A student 📚, freelance web developer 💻,
                   and a proud chai ☕ & coffee addict ☕.
                   I juggle classes, client deadlines, and caffeine like a pro 🎯.

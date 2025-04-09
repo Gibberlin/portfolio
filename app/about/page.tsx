@@ -2,7 +2,7 @@ export default function About() {
   return (
     <div className="min-h-screen flex md:flex-row flex-col md:p-10 w-full">
       <div className="max-w-4xl justify-center align-middle m-auto">
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8 ">
+        <div className="bg-white dark:bg-black rounded-lg shadow-xl p-8 ">
           <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center text-bold">
             About Me
           </h1>
@@ -23,7 +23,7 @@ export default function About() {
           <div className="mt-12">
             <h2 className="text-2xl font-semibold mb-6 text-semibold">Technical Skills</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              <div className="p-4 bg-gray-100 dark:bg-gray-700 rounded-lg">
+              <div className="p-4 bg-green-100 dark:bg-green-700 rounded-lg">
                 <h3 className="font-semibold mb-2">Programming Languages</h3>
                 <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300">
                   <li>C</li>
@@ -33,7 +33,7 @@ export default function About() {
                 </ul>
               </div>
               
-              <div className="p-4 bg-gray-100 dark:bg-gray-700 rounded-lg">
+              <div className="p-4 bg-green-100 dark:bg-green-700 rounded-lg">
                 <h3 className="font-semibold mb-2">Web Development</h3>
                 <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300">
                   <li>JavaScript</li>
@@ -43,7 +43,7 @@ export default function About() {
                 </ul>
               </div>
               
-              <div className="p-4 bg-gray-100 dark:bg-gray-700 rounded-lg">
+              <div className="p-4 bg-green-100 dark:bg-green-700 rounded-lg">
                 <h3 className="font-semibold mb-2">Backend & Databases</h3>
                 <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300">
                   <li>ExpressJS</li>
