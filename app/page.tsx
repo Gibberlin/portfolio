@@ -5,7 +5,7 @@ export default function Home() {
     const images = "/images/this-one.jpg";
   return (
       <div id ="Main" className="h-screen pt-40 w-full ease-in transition-colors">
-          <div className={`flex flex-col w-full md:flex-row flex-wrap md:pl-5`}>
+          <div className={`flex flex-col w-full md:flex-row flex-wrap md:pl-5 `}>
               <Type />
               <p className="max-w-prose italic p-5 md:text-2xl">&ldquo;Oh hey! I&apos;m <h1>Syed Yashin Hussain</h1>.
                   A student 📚, freelance web developer 💻,
