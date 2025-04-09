@@ -4,7 +4,7 @@ import "./globals.css";
 import Navbar from "@/app/navbar";
 import {ThemeProvider} from "next-themes";
 import {Silkscreen} from "next/font/google"
-import { Analytics } from "@vercel/analytics/react"
+import AnalyticsWrapper from "@/app/components/analytics";
 
 const silkscreen = Silkscreen({
   weight: "400",
@@ -39,7 +39,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
-
+      <AnalyticsWrapper />
       <body
         className={`${silkscreen.className} antialiased`}
       >
@@ -50,7 +50,6 @@ export default function RootLayout({
         </div>
       </ThemeProvider>
       </body>
-      <Analytics />
     </html>
   );
 }
