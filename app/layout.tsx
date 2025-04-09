@@ -40,7 +40,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning={true}>
 
       <body
-        className={`${silkscreen.variable}, antialiased`}
+        className={`${silkscreen.className} antialiased`}
       >
       <ThemeProvider defaultTheme="system" attribute="class" enableSystem >
         <div className="flex md:flex-row flex-col min-h-screen transition-colors ease-in-out w-full overflow-clip">

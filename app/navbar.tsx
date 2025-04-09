@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Navbar() {
     const {resolvedTheme, setTheme} = useTheme()
     return (
-        <div className=" p-5 flex flex-row md:flex-col sticky top-0 w-full md:h-screen md:w-1/6 Navbar shadow-lg  md:mr-5 bg-gradient-to-r from-blue-500 to-blue-900">
+        <div className=" p-5 flex flex-row md:flex-col sticky top-0 w-full md:h-screen md:w-1/6 Navbar shadow-lg  md:mr-5 bg-gradient-to-r from-blue-500 to-yellow-300 to-green-500">
             <h1 className="m-auto leading-tight h-full text-6xl font-bold  text-center">
                 
                     <Link href={"/"} >👽</Link>

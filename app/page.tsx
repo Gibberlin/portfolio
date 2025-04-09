@@ -1,10 +1,4 @@
 import Image from "next/image";
-import {Silkscreen} from "next/font/google"
-
-const silkscreen = Silkscreen({
-  weight: "400",
-  subsets: ["latin"],
-})
 
 export default function Home() {
     const images = "/images/this-one.jpg";
