@@ -1,9 +1,9 @@
 'use client';
 
-
+import EmailForm from '../components/emailJS';
 export default function SocialsPage() {
   return (
-    <div className="min-h-screen  dark:bg-[#030303] py-12 px-4 sm:px-6 lg:px-8 w-full">
+    <div className="min-h-screen  py-12 px-4 sm:px-6 lg:px-8 w-full">
       <div className="max-w-3xl mx-auto p-5 border-2 border-gray-300 rounded-lg">
         <h1 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">
           Let&apos;s Connect!
@@ -11,56 +11,13 @@ export default function SocialsPage() {
 
         <div className="grid gap-8">
           {/* Contact Form */}
-          <div className="bg-white dark:bg-[#030303] rounded-lg shadow-lg p-8 w-full h-full m-auto">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Contact Me</h2>
-            <form className="space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-white">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  className="mt-1 block w-full rounded-md border-gray-300 border-b-4 shadow-sm focus:border-grey-500 focus:ring-blue-500 dark:bg-[#030303] dark:border-gray-600 dark:text-white h-9"
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-white">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm border-b-4 focus:border-blue-500 focus:ring-blue-500 dark:bg-[#030303] dark:border-gray-600 dark:text-white"
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-white">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={4}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm border-b-4 focus:border-blue-500 focus:ring-blue-500 dark:bg-[#030303] dark:border-gray-600 dark:text-white"
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-              >
-                Send Message
-              </button>
-            </form>
-          </div>
+          <EmailForm /> 
 
           {/* Social Links */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* GitHub */}
             <a
-              href="https://github.com/yourusername"
+              href="https://github.com/Gibberlin"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center p-6 bg-white dark:bg-[#030303] rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
@@ -76,7 +33,7 @@ export default function SocialsPage() {
 
             {/* LinkedIn */}
             <a
-              href="https://linkedin.com/in/yourprofile"
+              href="https://linkedin.com/in/syed-yashin-hussain-74b206146"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center p-6 bg-white dark:bg-[#030303] rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
@@ -91,7 +48,7 @@ export default function SocialsPage() {
             </a>
             {/* Instagram */}
             <a
-              href="https://instagram.com/yourprofile"
+              href="https://instagram.com/https_yashin_"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center p-6 bg-white dark:bg-[#030303] rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
