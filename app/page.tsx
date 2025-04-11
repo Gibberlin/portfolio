@@ -2,7 +2,7 @@ import Image from "next/image";
 import Type from "@/app/components/type";
 
 export default function Home() {
-    const images = "/images/this-one.jpg";
+    const images = "./images/this-one.jpg";
   return (
       <div id ="Main" className="h-screen pt-40 w-full ease-in transition-colors">
           <div className={`flex flex-col w-full md:flex-row flex-wrap md:pl-5 `}>
