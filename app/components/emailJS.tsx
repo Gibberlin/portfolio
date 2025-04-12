@@ -22,11 +22,11 @@ export default function EmailForm() {
       form.current,
       process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
     )
-    .then((result) => {
+    .then(() => {
       setSubmitStatus('success');
       if (form.current) form.current.reset();
     })
-    .catch((error) => {
+    .catch(() => {
       setSubmitStatus('error');
     })
     .finally(() => {
