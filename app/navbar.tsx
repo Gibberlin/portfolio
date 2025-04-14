@@ -5,11 +5,11 @@ import Link from "next/link";
 export default function Navbar() {
     const {resolvedTheme, setTheme} = useTheme()
     return (
-        <div className="p-2 md:p-5 flex flex-row md:flex-col sticky top-0 w-full md:h-screen md:w-1/6 md:ml-5 Navbar shadow-lg md:mr-5 bg-gradient-to-r from-green-400  to-green-900 font-xs">
-            <h1 className="m-auto leading-tight h-full text-4xl md:text-6xl font-bold text-center">
+        <div className="p-1 md:p-5 flex flex-row md:flex-col sticky top-0 w-full md:h-screen md:w-1/6 md:ml-5 Navbar shadow-lg md:mr-5 bg-gradient-to-r from-green-400  to-green-900 font-xs">
+            <h1 className="m-auto leading-tight h-full text-4xl md:text-6xl font-bold text-center shadow-lg">
                 <Link href={"/"} >👽</Link>
             </h1>
-            <div className="flex flex-row md:flex-col items-center justify-center gap-2 md:gap-0">
+            <div className="flex flex-row md:flex-col items-center justify-center gap-1 md:gap-0">
                 <Link href={"/about"} className="text-balance font-bold text-lg md:text-2xl p-2 md:p-5 hover:scale-105 transition-transform hover:bg-green-100 hover:border-2 hover:border-green-500 rounded-full hover:text-green-500 hover:shadow-lg hover:shadow-green-900">About</Link>
                 <Link href={"/projects"} className="text-balance font-bold text-lg md:text-2xl p-2 md:p-5 hover:scale-105 transition-transform hover:bg-green-100 hover:border-2 hover:border-green-500 rounded-full hover:text-green-500 hover:shadow-lg hover:shadow-green-900">Projects</Link>
                 <Link href={"/contact"} className="text-balance font-bold text-lg md:text-2xl p-2 md:p-5 hover:scale-105 transition-transform hover:bg-green-100 hover:border-2 hover:border-green-500 rounded-full hover:text-green-500 hover:shadow-lg hover:shadow-green-900">Socials</Link>
