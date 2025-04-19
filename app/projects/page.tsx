@@ -1,5 +1,5 @@
 'use client'
-
+import { TypeAnimation } from 'react-type-animation'
 import { useEffect, useState } from 'react'
 
 interface GitHubRepo {
@@ -65,13 +65,22 @@ export default function Projects() {
   if (loading) {
     return (
       <div className="flex justify-center items-center w-full">
-        <div className="animate-spin rounded-full h-12 w-12"></div>
+        <TypeAnimation
+                sequence={[
+                    "LOADING.",
+                    12,
+                    "Done...",
+                    12,
+
+                ]}
+                className="md:text-7xl text-3xl font-bold text-green-500"
+            />
       </div>
     )
   }
 
   return (
-    <div className="w-full h-screen overflow-scroll p-8 md:p-16">
+    <div className="w-full h-screen overflow-scroll p-8 md:p-16 ">
       <div className="max-w-7xl mx-auto  ">
         <h1 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r">
           My Projects

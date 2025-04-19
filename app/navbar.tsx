@@ -1,13 +1,14 @@
 "use client"
 import {useTheme} from "next-themes";
 import Link from "next/link";
-
+import Image from "next/image";
 export default function Navbar() {
+    const alien = "/images/alien.gif"
     const {resolvedTheme, setTheme} = useTheme()
     return (
-        <div className="md:rounded-3xl md:p-5 flex flex-row md:flex-col sticky top-0 w-full md:h-screen md:w-1/6 md:ml-5 Navbar shadow-lg md:mr-5 bg-gradient-to-r from-green-400  to-green-900 font-xs">
-            <h1 className="m-auto leading-tight h-full text-4xl md:text-6xl font-bold text-center">
-                <Link href={"/"} >👽</Link>
+        <div className="md:rounded-3xl md:p-5 flex flex-row md:flex-col sticky z-50 top-0 w-full md:h-screen md:w-1/6 md:ml-5 Navbar shadow-lg md:mr-5 bg-gradient-to-r from-green-400  to-green-900 font-xs">
+            <h1 className=" h-full w-full">
+                <Link href={"/"} ><Image src={alien} alt="alien" width={10} height={15} className="md:m-auto m-4 p-1 size-10 md:size-auto "/></Link>
             </h1>
             <div className="flex flex-row md:flex-col items-center justify-center">
                 <Link href={"/about"} className="text-balance font-bold text-l md:text-2xl p-2 md:p-5 hover:scale-105 transition-transform hover:bg-green-100 hover:border-2 hover:border-green-500 rounded-full hover:text-green-500 hover:shadow-lg hover:shadow-green-900">About</Link>

@@ -38,13 +38,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning={true}>
+    <html lang="en" suppressHydrationWarning>
       <AnalyticsWrapper />
       <body
         className={`${silkscreen.className} antialiased`}
       >
-      <ThemeProvider defaultTheme="system" attribute="class" enableSystem >
-        <div className="flex md:flex-row flex-col min-h-screen transition-colors ease-in-out w-full overflow-clip">
+      <ThemeProvider defaultTheme="dark" attribute="class" enableSystem >
+        <div className="flex md:flex-row flex-col min-h-screen overflow-clip bg-[url(/images/background.jpg)] bg-cover bg-no-repeat md:bg-repeat-x md:bg-contain">
           <Navbar/>
           {children}
         </div>
