@@ -42,7 +42,7 @@ export default function EmailForm() {
           name="user_name"
           placeholder="Your Name"
           required
-          className="w-full p-2 border rounded dark:bg-green-800 border-green-700"
+          className="w-full p-2 border rounded dark:bg-blue-950 bg-blue-200 border-blue-700"
         />
       </div>
       <div>
@@ -51,7 +51,7 @@ export default function EmailForm() {
           name="user_email"
           placeholder="Your Email"
           required
-          className="w-full p-2 border rounded dark:bg-green-800 border-green-700"
+          className="w-full p-2 border rounded dark:bg-blue-950 bg-blue-200 border-blue-700"
         />
       </div>
       <div>
@@ -59,7 +59,7 @@ export default function EmailForm() {
           name="message"
           placeholder="Your Message"
           required
-          className="w-full p-2 border rounded h-32 dark:bg-green-800 border-green-700"
+          className="w-full p-2 border rounded h-32 dark:bg-blue-950 bg-blue-200 border-blue-700"
         />
       </div>
       <button
