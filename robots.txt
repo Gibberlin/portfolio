@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Block Next.js internal build & runtime paths
+Disallow: /_next/
+Disallow: /static/
+
+# Block API routes (not useful for SEO)
+Disallow: /api/
+
+# Block common sensitive paths (safe even if unused)
+Disallow: /admin/
+Disallow: /login/
+Disallow: /dashboard/
+
+# Sitemap (enable when available)
+# Sitemap: https://syeds.in/sitemap.xml
