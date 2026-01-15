@@ -11,7 +11,7 @@ export default function About() {
       </Head>
       <div className="min-h-screen flex md:flex-row flex-col md:p-10 w-full">
         <div className="max-w-4xl justify-center align-middle m-auto ">
-          <div className="backdrop-blur-lg backdrop-brightness-150 backdrop-contrast-200 dark:backdrop-brightness-50 md:rounded-lg shadow-xl p-8  ">
+          <div className="backdrop-blur-lg backdrop-brightness-150 backdrop-contrast-200 dark:bg-transparent dark:backdrop-blur-2xl dark:backdrop-brightness-50 dark:backdrop-contrast-200 md:rounded-lg shadow-xl p-8  ">
             <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center text-bold">
               About Me
             </h1>

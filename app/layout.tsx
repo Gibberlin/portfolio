@@ -44,7 +44,7 @@ export default function RootLayout({
         className={`${silkscreen.className} antialiased`}
       >
       <ThemeProvider defaultTheme="dark" attribute="class" enableSystem >
-        <div className="flex md:flex-row flex-col min-h-screen overflow-clip bg-[url(/images/background.jpg)] bg-cover bg-no-repeat md:bg-repeat-x md:bg-contain">
+        <div className="flex md:flex-row flex-col min-h-screen overflow-clip bg-[url(/images/background.jpg)] bg-cover bg-no-repeat md:bg-repeat-x md:bg-contain ">
           <Navbar/>
           {children}
         </div>

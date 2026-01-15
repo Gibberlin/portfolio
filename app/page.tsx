@@ -15,7 +15,10 @@ export default function Home() {
       <div id="Main" className="flex flex-col m-auto h-full pt-40 w-full ease-in transition-colors duration-100 dark:backdrop-brightness-50 dark:backdrop-blur-xl dark:backdriop-contrast-200 p-8 ">
         <div className="m-auto pr-10 p-5 flex md:h-1/2 w-full h-100 md:w-2/3 rounded-xl bg-white dark:backdrop-blur-2xl dark:bg-transparent dark:backdrop-contrast-200 ">
           <div>
+            <div className="bg-black h-40 w-80 border-2 border-green-500 rounded-xl">
             <Type />
+            </div>
+            
             <p className="max-w-prose italic p-5 md:text-2xl">&ldquo;Oh hey! I&apos;m <b>Syed Yashin Hussain</b>.
                 A student 📚, freelance web developer 💻,
                 and a proud chai ☕ & coffee addict ☕.

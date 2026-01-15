@@ -13,7 +13,7 @@ export default function SocialsPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="min-h-screen  py-12 px-4 sm:px-6 lg:px-8 w-full ">
-        <div className="max-w-3xl mx-auto p-5 md:p-20 bg-white dark:bg-transparent dark:backdrop-blur-2xl dark:backdrop-brightness-50">
+        <div className="max-w-3xl mx-auto p-5 md:p-20 bg-white dark:bg-transparent bg-opacity-50 border border-gray-200 dark:border-gray-800 dark:backdrop-blur-2xl dark:backdrop-brightness-50 dark:backdrop-contrast-200 rounded-xl">
           <h1 className="text-4xl md:text-7xl font-bold text-gray-900 dark:text-white mb-12 border-b-2 border-green-500">
             Let&apos;s Connect!
           </h1>

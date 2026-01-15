@@ -27,7 +27,7 @@ export default function Projects() {
   const transition={
     duration:0.8,
     delay:0.5,
-    ease:[0,0.71,0.2,1.01],
+    ease:[0,0.71,0.2,1.01] as const,
   }
 
   useEffect(() => {
@@ -87,14 +87,14 @@ export default function Projects() {
   }
 
   return (
-    <div className='min-h-screen flex md:flex-row flex-col md:p-10 w-full '>
+    <div className='min-h-screen flex md:flex-row flex-col md:p-10 w-full  '>
       <Head>
         <title>Syed Yashin Hussain | Projects</title>
         <meta name="description" content="View the projects and work of Syed Yashin Hussain - Web Development and Design Portfolio" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-        <div className="w-full h-screen overflow-scroll border md:overflow-hidden p-8 md:p-16">
+        <div className="w-full h-full overflow-scroll border md:overflow-hidden p-8 md:p-16 dark:backdrop-blur-2xl dark:backdrop-brightness-50 dark:backdrop-contrast-200 rounded-xl">
           <div className="max-w-7xl mx-auto">
             <h1 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r">
               My Projects
@@ -177,7 +177,7 @@ export default function Projects() {
                   rel="noopener noreferrer"
                   className="block p-6 bg-white dark:bg-gray-800 shadow-xl hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 border-foreground"
                 >
-                  <div className="flex items-start justify-between mb-2 overflow-clip">
+                  <div className="flex items-start justify-between mb-2 overflow-clip transition-transform">
                     <h3 className="text-xl font-semibold">{repo.name}</h3>
                     {repo.fork && (
                       <span className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-1 rounded">
