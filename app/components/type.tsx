@@ -6,7 +6,7 @@ import { TypeAnimation } from "react-type-animation";
 
 export default function Type() {
     return (
-        <div className="flex flex-row items-center justify-center text-center m-2 w-full">
+        <div className="flex flex-row items-center justify-center text-center m-2 w-full ">
             <TypeAnimation
                 sequence={[
                     "Hello, I'm Yashin",

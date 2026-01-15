@@ -6,7 +6,7 @@ export default function Navbar() {
     const alien = "/images/alien.gif"
     const {resolvedTheme, setTheme} = useTheme()
     return (
-        <div className="md:rounded-3xl md:p-5 flex flex-row md:flex-col sticky z-50 top-0 w-full md:h-screen md:w-1/6 md:ml-5 Navbar shadow-lg md:mr-5 bg-gradient-to-r from-green-400  to-green-900 font-xs">
+        <div className="m-0 md:rounded-3xl md:p-5 flex flex-row md:flex-col sticky z-50 top-0 w-full md:h- md:w-1/6 md:ml-5 Navbar shadow-lg md:mr-5 mt-4 mb-4 bg-gradient-to-r from-green-400  to-green-900 font-xs dark:bg-green-700  dark:to-green-950">
             <h1 className=" h-full w-full">
                 <Link href={"/"} ><Image src={alien} alt="alien" width={10} height={15} className="md:m-auto m-4 p-1 size-10 md:size-auto "/></Link>
             </h1>
