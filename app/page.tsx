@@ -7,13 +7,26 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Syed Yashin Hussain | Home</title>
-        <meta name="description" content="Personal portfolio of Syed Yashin Hussain - Student, Developer, and Designer" />
+        <title>Syed Yashin Hussain — Web Developer & Portfolio</title>
+        <meta name="description" content="Portfolio of Syed Yashin Hussain — freelance web developer, software projects, skills, and contact info." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="🌏" />
+
+        <meta property="og:title" content="Syed Yashin Hussain — Web Developer" />
+        <meta property="og:description" content="Portfolio and projects by Syed Yashin Hussain" />
+        <meta property="og:image" content="https://syeds.in/images/your-preview.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+
+         {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Syed Yashin Hussain — Web Developer & Portfolio" />
+        <meta name="twitter:description" content="Portfolio and projects by Syed Yashin Hussain" />
+        <meta name="twitter:image" content="https://syeds.in/images/preview.png" />
+
+        <link rel="icon"type="image/png" href="./favicon.ico" />
+        
       </Head>
-      <div id="Main" className="flex flex-col m-auto h-full pt-40 w-full ease-in transition-colors duration-100 dark:backdrop-brightness-50 dark:backdrop-blur-xl dark:backdriop-contrast-200 p-8 ">
-        <div className="m-auto pr-10 p-5 flex md:h-1/2 w-full h-100 md:w-2/3 rounded-xl bg-white dark:backdrop-blur-2xl dark:bg-transparent dark:backdrop-contrast-200 ">
+      <div id="Main" className="flex flex-col m-auto h-full pt-40 w-full ease-in  transition-colors duration-100 dark:backdrop-brightness-50 dark:backdrop-blur-xl dark:backdriop-contrast-200 p-8 ">
+        <div className="m-auto pr-10 p-5 flex md:h-1/2 w-full h-100 md:w-2/3 rounded-xl bg-white bg-opacity-50 dark:backdrop-blur-2xl dark:bg-transparent dark:backdrop-contrast-200 ">
           <div>
             <div className="bg-black md:h-40 md:w-80 xl:w-full border-2 border-green-500 rounded-xl">
             <Type />
@@ -30,7 +43,7 @@ export default function Home() {
         <div>
             <Hero />
           </div>
-        <div className="m-auto flex flex-col mt-20 p-5 md:h-1/3 w-full h-100 md:w-2/3 rounded-xl bg-white backdrop-blur-xl dark:bg-transparent dark:backdrop-contrast-200  ">
+        <div className="m-auto flex flex-col mt-20 p-5 md:h-1/3 w-full h-100 md:w-2/3 rounded-xl bg-white bg-opacity-50 backdrop-blur-xl dark:bg-transparent dark:backdrop-contrast-200  ">
             <h3 className="text-2xl text-green-700 text-center border-b-4 border-green-700">status</h3>
             <p>I am currently pursuing my B.Tech in Computer Science and Engineering at Barak Valley Engineering College (BVEC). 
               As a dedicated and curious student, I have a strong interest in software development, web technologies, and programming. 

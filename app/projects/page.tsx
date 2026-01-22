@@ -1,8 +1,10 @@
 'use client'
 import { TypeAnimation } from 'react-type-animation'
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import Head from "next/head";
 import { motion } from 'framer-motion'
+import { Listbox, Transition } from "@headlessui/react"
+import { ChevronUpDownIcon, CheckIcon } from "@heroicons/react/20/solid"
 
 interface GitHubRepo {
   name: string
@@ -16,14 +18,19 @@ interface GitHubRepo {
   visibility: string
   fork: boolean
 }
-
+const options = [
+  {id:1, value: "updated", label: "Recently Updated"},
+  {id:2, value: "created", label: "Recently Created"},
+]
 export default function Projects() {
+
   const [repos, setRepos] = useState<GitHubRepo[]>([])
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState('all')
   const [sortBy, setSortBy] = useState('updated')
   const [searchQuery, setSearchQuery] = useState('')
   const [showForks, setShowForks] = useState(true)
+  const [selected,  setSelected] = useState(options[0])
   const transition={
     duration:0.8,
     delay:0.5,
@@ -33,7 +40,9 @@ export default function Projects() {
   useEffect(() => {
     const fetchRepos = async () => {
       try {
-        const response = await fetch('https://api.github.com/users/Gibberlin/repos?sort=updated&per_page=100')
+        const response = await fetch(
+          'https://api.github.com/users/Gibberlin/repos?per_page=100'
+        )
         const data = await response.json()
         setRepos(data)
       } catch (error) {
@@ -42,9 +51,13 @@ export default function Projects() {
         setLoading(false)
       }
     }
-
+  
     fetchRepos()
   }, [])
+
+  useEffect(() => {
+    console.log("Sorting by:", sortBy)
+  }, [sortBy])
 
   const filteredRepos = repos.filter(repo => {
     // Filter by search query
@@ -94,15 +107,15 @@ export default function Projects() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-        <div className="w-full h-full overflow-scroll border md:overflow-hidden p-8 md:p-16 dark:backdrop-blur-2xl dark:backdrop-brightness-50 dark:backdrop-contrast-200 rounded-xl">
+        <div className="w-full h-full overflow-scroll border md:overflow-hidden p-8 md:p-16 bg-white dark:bg-transparent bg-opacity-50 dark:backdrop-blur-2xl dark:backdrop-brightness-50 dark:backdrop-contrast-200 rounded-xl">
           <div className="max-w-7xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r">
+            <h1 className="text-4xl md:text-5xl font-bold mb-8  bg-gradient-to-r">
               My Projects
             </h1>
 
             <div className="mb-8 space-y-4">
               {/* Search and Filter Controls */}
-              <div className="flex flex-col md:flex-row gap-4 justify-between items-start md:items-center">
+              <div className="flex flex-col md:flex-row gap-4 justify-between  items-start md:items-center">
                 <div className="w-full md:w-auto">
                   <input
                     type="text"
@@ -114,21 +127,65 @@ export default function Projects() {
                 </div>
 
                 <div className="flex items-center gap-4">
-                  <select
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)}
-                    className="px-4 py-2 rounded-lg bg-green-100 dark:bg-green-900 text-gray-700 dark:text-green-100 focus:outline-none focus:ring-2 focus:ring-green-500"
-                  >
-                    <option value="updated">Recently Updated</option>
-                    <option value="created">Recently Created</option>
-                  </select>
+                <div className="w-60">
+      <Listbox
+          value={selected}
+          onChange={(option) => 
+          {setSelected(option) 
+          setSortBy(option.value)}}>
+        <div className="relative">
+          <Listbox.Button className="relative w-full cursor-pointer rounded-md border border-green-500 bg-green-100 dark:bg-green-900 py-2 pl-4 pr-10 text-left text-gray-700 dark:text-green-100 focus:outline-none focus:ring-2 focus:ring-green-500">
+            <span className="block truncate">{selected.label}</span>
+            <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+              <ChevronUpDownIcon className="h-5 w-5 text-green-600 rounded-sm" >{selected.label}</ChevronUpDownIcon>
+            </span>
+          </Listbox.Button>
+
+          <Transition
+            as={Fragment}
+            leave="transition ease-in duration-100"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-green-50 dark:bg-green-950 py-1 shadow-lg ring-1 ring-black/5 focus:outline-none">
+              {options.map((option) => (
+                <Listbox.Option
+                  key={option.id}
+                  value={option}
+                  className={({ active }) =>
+                    `relative cursor-pointer select-none py-2 pl-10 pr-4 ${
+                      active
+                        ? "bg-green-200 dark:bg-green-800 text-green-900 dark:text-green-100"
+                        : "text-gray-700 dark:text-green-200"
+                    }`
+                  }
+                >
+                  {({ selected }) => (
+                    <>
+                      <span className={`block truncate ${selected ? "font-medium" : "font-normal"}`}>
+                        {option.label}
+                      </span>
+                      {selected && (
+                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-green-600">
+                          <CheckIcon className="h-5 w-5" />
+                        </span>
+                      )}
+                    </>
+                  )}
+                </Listbox.Option>
+              ))}
+            </Listbox.Options>
+          </Transition>
+        </div>
+      </Listbox>
+    </div>
 
                   <label className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
                     <input
                       type="checkbox"
                       checked={showForks}
                       onChange={(e) => setShowForks(e.target.checked)}
-                      className="rounded text-green-500 focus:ring-green-500"
+                      className="rounded text-green-500 focus:ring-green-500 bg-green-500"
                     />
                     Show Forks
                   </label>

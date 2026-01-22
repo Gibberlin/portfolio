@@ -6,13 +6,13 @@ export default function Navbar() {
     const alien = "/images/alien.gif"
     const {resolvedTheme, setTheme} = useTheme()
     return (
-        <div className="m-0 md:p-5 z-50 flex flex-row md:flex-col Navbar shadow-lg md:h-screen sticky top-0 bg-gradient-to-r from-green-200 to-green-900 dark:from-green-900 dark:to-green-950 ">
-            <h1 className=" h-full w-full">
+        <div className="m-0 md:p-5 z-50 flex md:w-50 flex-row md:flex-col Navbar shadow-lg md:h-screen sticky top-0 bg-gradient-to-r from-green-200 to-green-900 dark:from-green-900 dark:to-green-950 ">
+            <h1 className=" w-full flex justify-center">
                 <Link href={"/"} ><Image src={alien} alt="alien" width={10} height={15} className="md:m-auto m-4 p-1 size-10  md:size-40"/></Link>
             </h1>
-            <div className="flex flex-row md:flex-col items-center justify-center">
+            <div className="flex flex-row md:flex-col items-center justify-center overflow-x-clip h-full md:w-52">
                 <Link href={"/about"} className="text-balance font-bold text-l md:text-2xl p-2 md:p-5 hover:scale-105 transition-transform hover:bg-green-100 hover:border-2 hover:border-green-500 rounded-full hover:text-green-500 hover:shadow-lg hover:shadow-green-900">About</Link>
-                <Link href={"/projects"} className="text-balance font-bold text-l md:text-2xl p-2 md:p-5 hover:scale-105 transition-transform hover:bg-green-100 hover:border-2 hover:border-green-500 rounded-full hover:text-green-500 hover:shadow-lg hover:shadow-green-900">Projects</Link>
+                <Link href={"/projects"} className="text-balance font-bold text-l md:text-2xl p-2 md:p-5 transition-transform hover:bg-green-100 hover:border-2 hover:border-green-500 rounded-full hover:text-green-500 hover:shadow-lg hover:shadow-green-900">Projects</Link>
                 <Link href={"/contact"} className="text-balance font-bold text-l md:text-2xl p-2 md:p-5 hover:scale-105 transition-transform hover:bg-green-100 hover:border-2 hover:border-green-500 rounded-full hover:text-green-500 hover:shadow-lg hover:shadow-green-900">Socials</Link>
                 <button className="p-2 md:p-5 ease-in-out border-blue-100 hover:rotate-45 transition-transform"
                         onClick={() => {
