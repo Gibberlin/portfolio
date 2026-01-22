@@ -22,7 +22,7 @@ export default function Home() {
         <meta name="twitter:description" content="Portfolio and projects by Syed Yashin Hussain" />
         <meta name="twitter:image" content="https://syeds.in/images/preview.png" />
 
-        <link rel="icon"type="image/png" href="./favicon.ico" />
+        <link rel="icon"type="image/png" href="./favicon.jpg" />
         
       </Head>
       <div id="Main" className="flex flex-col m-auto h-full pt-40 w-full ease-in  transition-colors duration-100 dark:backdrop-brightness-50 dark:backdrop-blur-xl dark:backdriop-contrast-200 p-8 ">

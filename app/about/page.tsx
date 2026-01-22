@@ -7,7 +7,7 @@ export default function About() {
         <title>Syed Yashin Hussain | About</title>
         <meta name="description" content="Learn more about Syed Yashin Hussain - Skills, Experience, and Background" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="ℹ️" />
+        <link rel="icon" href="../favicon.ico" />
       </Head>
       <div className="min-h-screen flex md:flex-row flex-col md:p-10 w-full">
         <div className="max-w-4xl justify-center align-middle m-auto ">
