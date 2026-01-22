@@ -25,7 +25,7 @@ export default function Home() {
         <link rel="icon"type="image/png" href="./favicon.jpg" />
         
       </Head>
-      <div id="Main" className="flex flex-col m-auto h-full pt-40 w-full ease-in  transition-colors duration-100 dark:backdrop-brightness-50 dark:backdrop-blur-xl dark:backdriop-contrast-200 p-8 ">
+      <div id="Main" className="flex flex-col m-auto h-screen pt-40 w-full ease-in  transition-colors duration-100 dark:backdrop-brightness-50 dark:backdrop-blur-xl dark:backdriop-contrast-200 p-8 ">
         <div className="m-auto pr-10 p-5 flex md:h-1/2 w-full h-100 md:w-2/3 rounded-xl bg-white bg-opacity-50 dark:backdrop-blur-2xl dark:bg-transparent dark:backdrop-contrast-200 ">
           <div>
             <div className="bg-black md:h-40 md:w-80 xl:w-full border-2 border-green-500 rounded-xl">
