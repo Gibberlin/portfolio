@@ -11,23 +11,7 @@ const silkscreen = Silkscreen({
   subsets: ["latin"],
 })
 
-
-// const geistSans = localFont({
-//   src: "./fonts/GeistVF.woff",
-//   variable: "--font-geist-sans",
-//   weight: "100 900",
-// });
-// const geistMono = localFont({
-//   src: "./fonts/GeistMonoVF.woff",
-//   variable: "--font-geist-mono",
-//   weight: "100 900",
-// });
-// const helvetica =localFont({src: "./fonts/helvetica-regular.otf",
-//     variable: "--font-helvetica",
-//     weight: "100 900",
-// });
-
-export const metadata = {
+export const metadata: Metadata = {
   title: "Syed Yashin Hussain — Web Developer & Portfolio",
   description:
     "Portfolio of Syed Yashin Hussain — freelance web developer, software projects, skills, and contact info.",
@@ -39,7 +23,7 @@ export const metadata = {
     siteName: "Syed Yashin Hussain",
     images: [
       {
-        url: "https://syeds.in/images/preview.png",
+        url: "/images/preview.png",
         width: 1200,
         height: 630,
         alt: "Syed Yashin Hussain Portfolio",
@@ -52,7 +36,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Syed Yashin Hussain — Web Developer & Portfolio",
     description: "Portfolio and projects by Syed Yashin Hussain",
-    images: ["https://syeds.in/images/preview.png"],
+    images: ["/images/preview.png"],
   },
 };
 
