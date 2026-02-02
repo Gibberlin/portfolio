@@ -27,10 +27,35 @@ const silkscreen = Silkscreen({
 //     weight: "100 900",
 // });
 
-export const metadata: Metadata = {
-  title: "Syed Yashin Hussain",
-  description: "Student, Developer, Designer",
+export const metadata = {
+  title: "Syed Yashin Hussain — Web Developer & Portfolio",
+  description:
+    "Portfolio of Syed Yashin Hussain — freelance web developer, software projects, skills, and contact info.",
+
+  openGraph: {
+    title: "Syed Yashin Hussain — Web Developer",
+    description: "Portfolio and projects by Syed Yashin Hussain",
+    url: "https://syeds.in/",
+    siteName: "Syed Yashin Hussain",
+    images: [
+      {
+        url: "https://syeds.in/images/preview.png",
+        width: 1200,
+        height: 630,
+        alt: "Syed Yashin Hussain Portfolio",
+      },
+    ],
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Syed Yashin Hussain — Web Developer & Portfolio",
+    description: "Portfolio and projects by Syed Yashin Hussain",
+    images: ["https://syeds.in/images/preview.png"],
+  },
 };
+
 
 export default function RootLayout({
   children,
@@ -39,10 +64,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <AnalyticsWrapper />
+      
       <body
         className={`${silkscreen.className} antialiased`}
       >
+        <AnalyticsWrapper />
       <ThemeProvider defaultTheme="dark" attribute="class" enableSystem >
         <div className="flex md:flex-row flex-col min-h-screen overflow-clip bg-[url(/images/background.jpg)] bg-cover bg-no-repeat md:bg-repeat-x md:bg-contain ">
           <Navbar/>

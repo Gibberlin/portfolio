@@ -13,15 +13,23 @@ export default function Home() {
 
         <meta property="og:title" content="Syed Yashin Hussain — Web Developer" />
         <meta property="og:description" content="Portfolio and projects by Syed Yashin Hussain" />
-        <meta property="og:image" content="https://syeds.in/images/your-preview.png" />
-        <meta name="twitter:card" content="summary_large_image" />
-
+        <meta property="og:image" content="https://syeds.in/images/preview.png" />
+       
          {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Syed Yashin Hussain — Web Developer & Portfolio" />
         <meta name="twitter:description" content="Portfolio and projects by Syed Yashin Hussain" />
         <meta name="twitter:image" content="https://syeds.in/images/preview.png" />
+        {/*Whatsapp */}
+        <meta name="whatsapp:card" content="summary_large_image" />
+        <meta name="whatsapp:title" content="Syed Yashin Hussain — Web Developer & Portfolio" />
+        <meta name="whatsapp:description" content="Portfolio and projects by Syed Yashin Hussain" />
+        <meta name="whatsapp:image" content="https://syeds.in/images/preview.png" />
+        <meta property="og:url" content="https://syeds.in/" />
+        <meta property="og:type" content="website" />
 
+
+        {/* favicon */}
         <link rel="icon"type="image/png" href="./favicon.ico" />
         
       </Head>
