@@ -7,11 +7,35 @@ export default function SocialsPage() {
   return (
     <>
       <Head>
-        <title>Syed Yashin Hussain | Contact</title>
-        <meta name="description" content="Get in touch with Syed Yashin Hussain - Contact information and social media links" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+  <title>Contact — Syed Yashin Hussain | Freelance Web Developer</title>
+
+  <meta
+    name="description"
+    content="Get in touch with Syed Yashin Hussain — Freelance Web Developer. Connect via GitHub, LinkedIn, or email."
+  />
+
+  <link rel="canonical" href="https://syeds.in/contact" />
+
+  {/* Open Graph */}
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Contact Syed Yashin Hussain — Web Developer" />
+  <meta
+    property="og:description"
+    content="Hire or connect with Syed Yashin Hussain — Freelance Web Developer and Software Engineer."
+  />
+  <meta property="og:url" content="https://syeds.in/contact" />
+  <meta property="og:image" content="https://syeds.in/images/preview.png" />
+
+  {/* Twitter */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Contact Syed Yashin Hussain — Web Developer" />
+  <meta
+    name="twitter:description"
+    content="Get in touch with Syed Yashin Hussain — Freelance Web Developer."
+  />
+  <meta name="twitter:image" content="https://syeds.in/images/preview.png" />
+</Head>
+
       <div className="min-h-screen  py-12 px-4 sm:px-6 lg:px-8 w-full ">
         <div className="max-w-3xl mx-auto p-5 md:p-20 bg-white dark:bg-transparent bg-opacity-50 border border-gray-200 dark:border-gray-800 dark:backdrop-blur-2xl dark:backdrop-brightness-50 dark:backdrop-contrast-200 rounded-xl">
           <h1 className="text-4xl md:text-7xl font-bold text-gray-900 dark:text-white mb-12 border-b-2 border-green-500">

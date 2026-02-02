@@ -22,22 +22,15 @@ export default function Home() {
         <meta name="twitter:description" content="Portfolio and projects by Syed Yashin Hussain" />
         <meta name="twitter:image" content="https://syeds.in/images/preview.png" />
 
-        <link rel="icon"type="image/png" href="./favicon.jpg" />
+        <link rel="icon"type="image/png" href="./favicon.ico" />
         
       </Head>
-      <div id="Main" className="flex flex-col m-auto h-screen pt-40 w-full ease-in  transition-colors duration-100 dark:backdrop-brightness-50 dark:backdrop-blur-xl dark:backdriop-contrast-200 p-8 ">
-        <div className="m-auto pr-10 p-5 flex md:h-1/2 w-full h-100 md:w-2/3 rounded-xl bg-white bg-opacity-50 dark:backdrop-blur-2xl dark:bg-transparent dark:backdrop-contrast-200 ">
+      <div id="Main" className="flex flex-col m-auto md:h-screen h-full pt-40 w-full ease-in  transition-colors duration-100 dark:backdrop-brightness-50 dark:backdrop-blur-xl dark:backdriop-contrast-200 p-8 ">
+        <div className="m-auto p-5 flex md:h-1/2 w-full h-100 md:w-2/3 rounded-xl bg-white bg-opacity-50 dark:backdrop-blur-2xl dark:bg-transparent dark:backdrop-contrast-200 ">
           <div>
-            <div className="bg-black md:h-40 md:w-80 xl:w-full border-2 border-green-500 rounded-xl">
+            <div className="md:h-56 md:w-[53em] h-48 w-[22em] bg-black">
             <Type />
             </div>
-            
-            <p className="max-w-prose italic p-5 md:text-2xl">&ldquo;Oh hey! I&apos;m <b>Syed Yashin Hussain</b>.
-                A student 📚, freelance web developer 💻,
-                and a proud chai ☕ & coffee addict ☕.
-                I juggle classes, client deadlines, and caffeine like a pro 🎯.
-                If your website&apos;s broken, I&apos;ll fix it 🛠️. If it&apos;s ugly, I&apos;ll make it shine ✨.
-                Just don&apos;t ask me to choose between chai and coffee.... 😮‍💨<br/>we all have our limits 😎.&rdquo;</p>
           </div>
         </div>
         <div>

@@ -4,10 +4,33 @@ export default function About() {
   return (
     <>
       <Head>
-        <title>Syed Yashin Hussain | About</title>
-        <meta name="description" content="Learn more about Syed Yashin Hussain - Skills, Experience, and Background" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="../favicon.ico" />
+        <title>About — Syed Yashin Hussain | Web Developer</title>
+
+<meta
+  name="description"
+  content="Learn more about Syed Yashin Hussain — a Web Developer specializing in React, Next.js, JavaScript and Full Stack development."
+/>
+
+<link rel="canonical" href="https://syeds.in/about" />
+
+{/* Open Graph */}
+<meta property="og:type" content="profile" />
+<meta property="og:title" content="About Syed Yashin Hussain — Web Developer" />
+<meta
+  property="og:description"
+  content="Discover the journey, skills, and experience of Syed Yashin Hussain — Web Developer & Software Engineer."
+/>
+<meta property="og:url" content="https://syeds.in/about" />
+<meta property="og:image" content="https://syeds.in/images/preview.png" />
+
+{/* Twitter */}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="About Syed Yashin Hussain — Web Developer" />
+<meta
+  name="twitter:description"
+  content="Learn more about Syed Yashin Hussain — Web Developer & Software Engineer."
+/>
+<meta name="twitter:image" content="https://syeds.in/images/preview.png" />
       </Head>
       <div className="min-h-screen flex md:flex-row flex-col md:p-10 w-full">
         <div className="max-w-4xl justify-center align-middle m-auto ">

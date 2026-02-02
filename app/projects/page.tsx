@@ -102,11 +102,35 @@ export default function Projects() {
   return (
     <div className='min-h-screen flex md:flex-row flex-col md:p-10 w-full  '>
       <Head>
-        <title>Syed Yashin Hussain | Projects</title>
-        <meta name="description" content="View the projects and work of Syed Yashin Hussain - Web Development and Design Portfolio" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+  <title>Projects — Syed Yashin Hussain | Web Developer Portfolio</title>
+
+  <meta
+    name="description"
+    content="Explore the web development projects of Syed Yashin Hussain. View React, Next.js, JavaScript, and Full Stack applications with GitHub links."
+  />
+
+  <link rel="canonical" href="https://syeds.in/projects" />
+
+  {/* Open Graph */}
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Projects — Syed Yashin Hussain" />
+  <meta
+    property="og:description"
+    content="A collection of web development projects built by Syed Yashin Hussain using modern technologies."
+  />
+  <meta property="og:url" content="https://syeds.in/projects" />
+  <meta property="og:image" content="https://syeds.in/images/preview.png" />
+
+  {/* Twitter */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Projects — Syed Yashin Hussain" />
+  <meta
+    name="twitter:description"
+    content="Explore my web development projects built with React, Next.js, and JavaScript."
+  />
+  <meta name="twitter:image" content="https://syeds.in/images/preview.png" />
+</Head>
+
         <div className="w-full h-full overflow-scroll border md:overflow-hidden p-8 md:p-16 bg-white dark:bg-transparent bg-opacity-50 dark:backdrop-blur-2xl dark:backdrop-brightness-50 dark:backdrop-contrast-200 rounded-xl">
           <div className="max-w-7xl mx-auto">
             <h1 className="text-4xl md:text-5xl font-bold mb-8  bg-gradient-to-r">
