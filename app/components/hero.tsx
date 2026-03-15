@@ -5,16 +5,16 @@ import { motion } from 'framer-motion'
 const Hero = () => {
   return (
     <div>
-      <ul className="inline-block md:flex cursor-pointer text-4xl md:text-2xl md:flex-row text-clip bg-gradient-to-r from-green-500  to-blue-500 font-extrabold text-transparent bg-clip-text text-center align-center justify-center">
-              <li className="p-3 "> My work</li>
-              <li className="p-3">Download my Resume</li>
+      <ul className="inline-block md:flex cursor-pointer text-3xl md:text-2xl md:flex-row text-clip font-extrabold text-emerald-300 text-center align-center justify-center gap-4">
+              <li className="px-4 py-2 bg-slate-900 border-4 border-emerald-400 inline-block">
+                MY WORK
+              </li>
+              <li className="px-4 py-2 bg-slate-900 border-4 border-emerald-400 inline-block">
+                DOWNLOAD RESUME
+              </li>
               <motion.div
-                whileHover={{scale:1.5}}
-                whileTap={{scale:0.5}}
-                animate={{
-                    scale:2,
-                    transition: {duration:3}
-                }}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
                 />
             </ul>
     </div>

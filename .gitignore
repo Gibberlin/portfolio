@@ -19,6 +19,12 @@
 # misc
 .DS_Store
 *.pem
+.agents/
+.augment/
+.claude/
+.commandcode/
+.continue/
+.cursor/
 
 # debug
 npm-debug.log*

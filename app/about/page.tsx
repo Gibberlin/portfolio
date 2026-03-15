@@ -34,12 +34,12 @@ export default function About() {
       </Head>
       <div className="min-h-screen flex md:flex-row flex-col md:p-10 w-full">
         <div className="max-w-4xl justify-center align-middle m-auto ">
-          <div className="backdrop-blur-lg backdrop-brightness-150 backdrop-contrast-200 dark:bg-transparent dark:backdrop-blur-2xl dark:backdrop-brightness-50 dark:backdrop-contrast-200 md:rounded-lg shadow-xl p-8  ">
-            <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center text-bold">
+          <div className="bg-white/70 dark:bg-[#0F172A]/70 backdrop-blur-md border-4 border-[var(--border-color)] p-8">
+            <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center text-[var(--text-color)] border-b-4 border-[var(--border-color)] pb-2">
               About Me
             </h1>
             
-            <div className="space-y-6 text-lg">
+            <div className="space-y-6 text-lg text-[var(--text-color)]">
               <p className="leading-relaxed">
                 Hi, I&apos;m Yashin! I&apos;m a passionate software and web developer with expertise in C, C++, Java, and Python. 
                 For web development, I specialize in JavaScript, TypeScript, React, and Next.js, along with backend technologies 
@@ -53,12 +53,12 @@ export default function About() {
             </div>
 
             <div className="mt-12 ">
-              <h2 className="text-2xl font-semibold mb-6 text-semibold">Technical Skills</h2>
+              <h2 className="text-2xl font-semibold mb-6 text-[var(--text-color)] border-b-4 border-[var(--border-color)] pb-2">Technical Skills</h2>
               <div className="flex flex-col md:flex-row w-full gap-3">
                 
-                <div className="p-4 bg-green-100 dark:bg-green-700 rounded-lg w-full">
-                  <h3 className="font-semibold mb-2">Programming Languages</h3>
-                  <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300">
+                <div className="p-4 bg-[var(--card-bg)] border-4 border-[var(--border-color)] w-full">
+                  <h3 className="font-semibold mb-2 text-[var(--text-color)]">Programming Languages</h3>
+                  <ul className="list-disc list-inside space-y-1 text-[var(--text-color)]">
                     <li>C</li>
                     <li>C++</li>
                     <li>Java</li>
@@ -66,9 +66,9 @@ export default function About() {
                   </ul>
                 </div>
                 
-                <div className="p-4 bg-green-100 dark:bg-green-700 rounded-lg w-full">
-                  <h3 className="font-semibold mb-2">Web Development</h3>
-                  <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300">
+                <div className="p-4 bg-[var(--card-bg)] border-4 border-[var(--border-color)] w-full">
+                  <h3 className="font-semibold mb-2 text-[var(--text-color)]">Web Development</h3>
+                  <ul className="list-disc list-inside space-y-1 text-[var(--text-color)]">
                     <li>JavaScript</li>
                     <li>TypeScript</li>
                     <li>React</li>
@@ -76,9 +76,9 @@ export default function About() {
                   </ul>
                 </div>
                 
-                <div className="p-4 bg-green-100 dark:bg-green-700 rounded-lg w-full">
-                  <h3 className="font-semibold mb-2">Backend & Databases</h3>
-                  <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300">
+                <div className="p-4 bg-[var(--card-bg)] border-4 border-[var(--border-color)] w-full">
+                  <h3 className="font-semibold mb-2 text-[var(--text-color)]">Backend & Databases</h3>
+                  <ul className="list-disc list-inside space-y-1 text-[var(--text-color)]">
                     <li>ExpressJS</li>
                     <li>PHP</li>
                     <li>NodeJS</li>
@@ -88,9 +88,9 @@ export default function About() {
                   </ul>
                 </div>
 
-                <div className="p-4 bg-green-100 dark:bg-green-700 rounded-lg w-full">
-                  <h3 className="font-semibold mb-2">Graphics</h3>
-                  <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300">
+                <div className="p-4 bg-[var(--card-bg)] border-4 border-[var(--border-color)] w-full">
+                  <h3 className="font-semibold mb-2 text-[var(--text-color)]">Graphics</h3>
+                  <ul className="list-disc list-inside space-y-1 text-[var(--text-color)]">
                     <li>Blender</li>
                     <li>GIMP</li>
                     <li>Figma</li>

@@ -86,21 +86,20 @@ export default function Projects() {
     return (
       <div className="flex justify-center items-center w-full">
         <TypeAnimation
-                sequence={[
-                    "LOADING.",
-                    12,
-                    "Done...",
-                    12,
-
-                ]}
-                className="md:text-7xl text-3xl font-bold text-green-500"
-            />
+          sequence={[
+            "LOADING...",
+            250,
+            "READY!",
+            250,
+          ]}
+          className="md:text-7xl text-3xl font-bold text-emerald-400 tracking-[0.2em]"
+        />
       </div>
     )
   }
 
   return (
-    <div className='min-h-screen flex md:flex-row flex-col md:p-10 w-full  '>
+    <div className='min-h-screen flex md:flex-row flex-col md:p-10 w-full'>
       <Head>
   <title>Projects — Syed Yashin Hussain | Web Developer Portfolio</title>
 
@@ -131,9 +130,9 @@ export default function Projects() {
   <meta name="twitter:image" content="https://syeds.in/images/preview.png" />
 </Head>
 
-        <div className="w-full h-full overflow-scroll border md:overflow-hidden p-8 md:p-16 bg-white dark:bg-transparent bg-opacity-50 dark:backdrop-blur-2xl dark:backdrop-brightness-50 dark:backdrop-contrast-200 rounded-xl">
+        <div className="w-full h-full overflow-scroll border-4 border-[var(--border-color)] md:overflow-hidden p-8 md:p-16 bg-white/70 dark:bg-[#0F172A]/70 backdrop-blur-md">
           <div className="max-w-7xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold mb-8  bg-gradient-to-r">
+            <h1 className="text-4xl md:text-5xl font-bold mb-8 text-[var(--text-color)] border-b-4 border-[var(--border-color)] pb-2">
               My Projects
             </h1>
 
@@ -146,7 +145,7 @@ export default function Projects() {
                     placeholder="Search projects..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full md:w-64 px-4 py-2 rounded-lg bg-gray-100 dark:bg-green-900 text-gray-900 dark:text-green-100 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full md:w-64 px-4 py-2 bg-emerald-100 border-4 border-emerald-700 text-slate-900 focus:outline-none dark:bg-slate-900 dark:border-emerald-400 dark:text-emerald-100"
                   />
                 </div>
 
@@ -158,7 +157,7 @@ export default function Projects() {
           {setSelected(option) 
           setSortBy(option.value)}}>
         <div className="relative">
-          <Listbox.Button className="relative w-full cursor-pointer rounded-md border border-green-500 bg-green-100 dark:bg-green-900 py-2 pl-4 pr-10 text-left text-gray-700 dark:text-green-100 focus:outline-none focus:ring-2 focus:ring-green-500">
+          <Listbox.Button className="relative w-full cursor-pointer border-4 border-emerald-700 bg-emerald-100 py-2 pl-4 pr-10 text-left text-slate-900 focus:outline-none dark:bg-slate-900 dark:border-emerald-400 dark:text-emerald-100">
             <span className="block truncate">{selected.label}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
               <ChevronUpDownIcon className="h-5 w-5 text-green-600 rounded-sm" >{selected.label}</ChevronUpDownIcon>
@@ -171,16 +170,16 @@ export default function Projects() {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-green-50 dark:bg-green-950 py-1 shadow-lg ring-1 ring-black/5 focus:outline-none">
+            <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto bg-emerald-50 py-1 border-4 border-emerald-700 focus:outline-none dark:bg-slate-900 dark:border-emerald-400">
               {options.map((option) => (
                 <Listbox.Option
                   key={option.id}
                   value={option}
                   className={({ active }) =>
-                    `relative cursor-pointer select-none py-2 pl-10 pr-4 ${
+                    `relative cursor-pointer select-none py-2 pl-10 pr-4 text-slate-900 dark:text-emerald-100 ${
                       active
-                        ? "bg-green-200 dark:bg-green-800 text-green-900 dark:text-green-100"
-                        : "text-gray-700 dark:text-green-200"
+                        ? "bg-emerald-200 dark:bg-slate-800"
+                        : "bg-emerald-50 dark:bg-slate-900"
                     }`
                   }
                 >
@@ -204,12 +203,12 @@ export default function Projects() {
       </Listbox>
     </div>
 
-                  <label className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
+            <label className="flex items-center gap-2 text-[var(--text-color)]">
                     <input
                       type="checkbox"
                       checked={showForks}
                       onChange={(e) => setShowForks(e.target.checked)}
-                      className="rounded text-green-500 focus:ring-green-500 bg-green-500"
+                      className="rounded border-2 border-[var(--border-color)] text-[var(--text-color)]"
                     />
                     Show Forks
                   </label>
@@ -220,10 +219,10 @@ export default function Projects() {
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => setFilter('all')}
-                  className={`px-4 py-2 rounded-lg transition-colors ${
+                  className={`px-4 py-2 border-4 transition-colors ${
                     filter === 'all'
-                      ? 'bg-green-500 text-white'
-                      : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                      ? 'bg-[var(--accent-primary)] text-[var(--page-bg)] border-[var(--border-color)]'
+                      : 'bg-[var(--card-bg)] text-[var(--text-color)] border-[var(--border-color)] hover:bg-[var(--accent-secondary)]'
                   }`}
                 >
                   All
@@ -232,10 +231,10 @@ export default function Projects() {
                   <button
                     key={lang}
                     onClick={() => setFilter(lang)}
-                    className={`px-4 py-2 rounded-lg transition-colors ${
+                    className={`px-4 py-2 border-4 transition-colors ${
                       filter === lang
-                        ? 'bg-green-500 text-white'
-                        : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                        ? 'bg-[var(--accent-primary)] text-[var(--page-bg)] border-[var(--border-color)]'
+                        : 'bg-[var(--card-bg)] text-[var(--text-color)] border-[var(--border-color)] hover:bg-[var(--accent-secondary)]'
                     }`}
                   >
                     {lang}
@@ -245,18 +244,20 @@ export default function Projects() {
             </div>
 
             {/* Projects Grid */}
-            <motion.div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-4 gap-2 h-full" 
-            initial={{scale:0}}
-            animate={{scale:1}}
-            transition={transition}
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-4 gap-2 h-full"
+              layout
             >
-              {sortedRepos.map((repo) => (
-                <a
+              {sortedRepos.map((repo, index) => (
+                <motion.a
                   key={repo.name}
                   href={repo.html_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block p-6 bg-white dark:bg-gray-800 shadow-xl hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 border-foreground"
+                  initial={{ opacity: 0, y: 12, scale: 0.96 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.35, delay: index * 0.04, ease: [0.16, 1, 0.3, 1] }}
+                  className="block p-6 bg-[var(--card-bg)] text-[var(--text-color)] border-4 border-[var(--border-color)] hover:-translate-y-1 transition-transform"
                 >
                   <div className="flex items-start justify-between mb-2 overflow-clip transition-transform">
                     <h3 className="text-xl font-semibold">{repo.name}</h3>
@@ -275,7 +276,7 @@ export default function Projects() {
                       {repo.language || 'Unknown'}
                     </span>
                   </div>
-                </a>
+                </motion.a>
               ))}
             </motion.div>
           </div>

@@ -33,28 +33,33 @@ export default function Home() {
         <link rel="icon"type="image/png" href="./favicon.ico" />
         
       </Head>
-      <div id="Main" className="flex flex-col m-auto md:h-screen h-full pt-40 w-full ease-in  transition-colors duration-100 dark:backdrop-brightness-50 dark:backdrop-blur-xl dark:backdriop-contrast-200 p-8 ">
-        <div className="m-auto p-5 flex md:h-1/2 w-full h-100 md:w-2/3 rounded-xl bg-white bg-opacity-50 dark:backdrop-blur-2xl dark:bg-transparent dark:backdrop-contrast-200 ">
-          <div>
-            <div className="md:h-56 md:w-[53em] h-48 w-[22em] bg-black">
+      <main
+        id="Main"
+        className="flex flex-col w-full max-w-5xl mx-auto h-full md:min-h-screen pt-32 px-4 md:px-8"
+      >
+        <div className="w-full mx-auto p-4 md:p-6 flex bg-white/70 dark:bg-[#0F172A]/70 backdrop-blur-md border-4 border-[var(--border-color)]">
+          <div className="w-full bg-white/70 dark:bg-[#0F172A]/70 backdrop-blur-md px-4 py-6 md:px-6 md:py-8 border-4 border-[var(--border-color)]">
             <Type />
-            </div>
           </div>
         </div>
         <div>
             <Hero />
           </div>
-        <div className="m-auto flex flex-col mt-20 p-5 md:h-1/3 w-full h-100 md:w-2/3 rounded-xl bg-white bg-opacity-50 backdrop-blur-xl dark:bg-transparent dark:backdrop-contrast-200  ">
-            <h3 className="text-2xl text-green-700 text-center border-b-4 border-green-700">status</h3>
-            <p>I am currently pursuing my B.Tech in Computer Science and Engineering at Barak Valley Engineering College (BVEC). 
-              As a dedicated and curious student, I have a strong interest in software development, web technologies, and programming. 
-              My academic journey so far has helped me build a solid foundation in both theoretical concepts and practical applications. 
-              I enjoy exploring new technologies and continuously strive to enhance my skills through hands-on projects and self-learning. 
-              Being a part of BVEC has provided me with valuable learning opportunities,
-               and I aim to make the most of my time here to grow both academically and personally.</p>
-          </div>
-         
-      </div>
+        <div className="w-full mx-auto flex flex-col mt-10 md:mt-16 p-4 md:p-6 bg-white/70 dark:bg-[#0F172A]/70 backdrop-blur-md border-4 border-[var(--border-color)]">
+          <h2 className="text-2xl font-semibold text-[var(--text-color)] text-center border-b-4 border-[var(--border-color)] pb-2">
+            Status
+          </h2>
+          <p className="mt-4 leading-relaxed text-[var(--text-color)]">
+            I am currently pursuing my B.Tech in Computer Science and Engineering at Barak Valley Engineering College (BVEC).
+            As a dedicated and curious student, I have a strong interest in software development, web technologies, and programming.
+            My academic journey so far has helped me build a solid foundation in both theoretical concepts and practical applications.
+            I enjoy exploring new technologies and continuously strive to enhance my skills through hands-on projects and self-learning.
+            Being a part of BVEC has provided me with valuable learning opportunities, and I aim to make the most of my time here to grow
+            both academically and personally.
+          </p>
+        </div>
+
+      </main>
     </>
   );
 }
