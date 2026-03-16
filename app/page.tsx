@@ -1,7 +1,7 @@
 import Type from "@/app/components/type";
+import PlayerStats from "@/app/components/player-stats";
 import Head from "next/head";
 import Hero from "./components/hero";
-
 
 export default function Home() {
   return (
@@ -35,30 +35,21 @@ export default function Home() {
       </Head>
       <main
         id="Main"
-        className="flex flex-col w-full max-w-5xl mx-auto h-full md:min-h-screen pt-32 px-4 md:px-8"
+        className="relative mx-auto flex min-h-[calc(100vh-4rem)] w-full max-w-5xl flex-col overflow-hidden px-3 pb-8 pt-24 sm:px-4 sm:pb-10 sm:pt-28 md:min-h-screen md:px-8 md:pb-16 md:pt-32"
       >
-        <div className="w-full mx-auto p-4 md:p-6 flex bg-white/70 dark:bg-[#0F172A]/70 backdrop-blur-md border-4 border-[var(--border-color)]">
-          <div className="w-full bg-white/70 dark:bg-[#0F172A]/70 backdrop-blur-md px-4 py-6 md:px-6 md:py-8 border-4 border-[var(--border-color)]">
-            <Type />
-          </div>
-        </div>
-        <div>
-            <Hero />
-          </div>
-        <div className="w-full mx-auto flex flex-col mt-10 md:mt-16 p-4 md:p-6 bg-white/70 dark:bg-[#0F172A]/70 backdrop-blur-md border-4 border-[var(--border-color)]">
-          <h2 className="text-2xl font-semibold text-[var(--text-color)] text-center border-b-4 border-[var(--border-color)] pb-2">
-            Status
-          </h2>
-          <p className="mt-4 leading-relaxed text-[var(--text-color)]">
-            I am currently pursuing my B.Tech in Computer Science and Engineering at Barak Valley Engineering College (BVEC).
-            As a dedicated and curious student, I have a strong interest in software development, web technologies, and programming.
-            My academic journey so far has helped me build a solid foundation in both theoretical concepts and practical applications.
-            I enjoy exploring new technologies and continuously strive to enhance my skills through hands-on projects and self-learning.
-            Being a part of BVEC has provided me with valuable learning opportunities, and I aim to make the most of my time here to grow
-            both academically and personally.
-          </p>
-        </div>
-
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-3 top-20 h-36 animate-terminal-glow rounded-[1.75rem] bg-[radial-gradient(circle_at_top,rgba(30,238,12,0.18),transparent_68%)] blur-2xl sm:inset-x-4 sm:top-24 sm:h-48 md:inset-x-8"
+        />
+        <section className="terminal-reveal terminal-delay-1 w-full">
+          <Type />
+        </section>
+        <section className="terminal-reveal terminal-delay-2 mt-6 sm:mt-8 md:mt-10">
+          <Hero />
+        </section>
+        <section className="terminal-panel terminal-reveal terminal-delay-3 mt-8 flex flex-col md:mt-16">
+          <PlayerStats />
+        </section>
       </main>
     </>
   );

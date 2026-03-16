@@ -3,20 +3,37 @@ import React from 'react'
 import { motion } from 'framer-motion'
 
 const Hero = () => {
+  const ctaItems = [
+    "MY WORK",
+    "DOWNLOAD RESUME",
+  ]
+
   return (
-    <div>
-      <ul className="inline-block md:flex cursor-pointer text-3xl md:text-2xl md:flex-row text-clip font-extrabold text-emerald-300 text-center align-center justify-center gap-4">
-              <li className="px-4 py-2 bg-slate-900 border-4 border-emerald-400 inline-block">
-                MY WORK
-              </li>
-              <li className="px-4 py-2 bg-slate-900 border-4 border-emerald-400 inline-block">
-                DOWNLOAD RESUME
-              </li>
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                />
-            </ul>
+    <div className="flex justify-center">
+      <ul className="flex w-full flex-col gap-4 text-center text-lg font-extrabold text-emerald-300 sm:text-2xl md:flex-row md:justify-center">
+        {ctaItems.map((label, index) => (
+          <motion.li
+            key={label}
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.45,
+              delay: 0.32 + (index * 0.12),
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            whileHover={{ y: -3, scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="w-full md:w-auto"
+          >
+            <button
+              type="button"
+              className="terminal-cta w-full px-4 py-3 md:min-w-[16rem]"
+            >
+              <span className="terminal-cta-label">{label}</span>
+            </button>
+          </motion.li>
+        ))}
+      </ul>
     </div>
   )
 }

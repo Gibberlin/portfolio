@@ -22,6 +22,7 @@ const options = [
   {id:1, value: "updated", label: "Recently Updated"},
   {id:2, value: "created", label: "Recently Created"},
 ]
+
 export default function Projects() {
 
   const [repos, setRepos] = useState<GitHubRepo[]>([])
@@ -31,28 +32,34 @@ export default function Projects() {
   const [searchQuery, setSearchQuery] = useState('')
   const [showForks, setShowForks] = useState(true)
   const [selected,  setSelected] = useState(options[0])
-  const transition={
-    duration:0.8,
-    delay:0.5,
-    ease:[0,0.71,0.2,1.01] as const,
-  }
-
   useEffect(() => {
+    let isActive = true
+
     const fetchRepos = async () => {
       try {
         const response = await fetch(
           'https://api.github.com/users/Gibberlin/repos?per_page=100'
         )
         const data = await response.json()
-        setRepos(data)
+        if (isActive) {
+          setRepos(data)
+        }
       } catch (error) {
         console.error('Error fetching GitHub repos:', error)
       } finally {
-        setLoading(false)
+        window.setTimeout(() => {
+          if (isActive) {
+            setLoading(false)
+          }
+        }, 1000)
       }
     }
   
     fetchRepos()
+
+    return () => {
+      isActive = false
+    }
   }, [])
 
   useEffect(() => {
@@ -84,22 +91,39 @@ export default function Projects() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center w-full">
-        <TypeAnimation
-          sequence={[
-            "LOADING...",
-            250,
-            "READY!",
-            250,
-          ]}
-          className="md:text-7xl text-3xl font-bold text-emerald-400 tracking-[0.2em]"
-        />
-      </div>
+      <main className='flex min-h-[calc(100vh-4rem)] w-full flex-col px-3 pb-8 pt-24 sm:px-4 sm:pt-28 md:min-h-screen md:p-10'>
+        <Head>
+          <title>Projects — Syed Yashin Hussain | Web Developer Portfolio</title>
+        </Head>
+
+        <div className="w-full border-4 border-[var(--border-color)] bg-white/70 p-4 backdrop-blur-md dark:bg-[#0F172A]/70 sm:p-6 md:p-10 lg:p-16">
+          <div className="mx-auto flex min-h-[24rem] max-w-7xl flex-col justify-center">
+            <div className="mb-6 border-b-4 border-[var(--border-color)] pb-2 text-center md:mb-8">
+              <h1 className="text-3xl font-bold text-[var(--text-color)] sm:text-4xl md:text-5xl">
+                My Projects
+              </h1>
+            </div>
+
+            <div className="flex flex-1 items-center justify-center py-8 text-center">
+              <TypeAnimation
+                sequence={[
+                  "LOADING...",
+                  250,
+                  "READY!",
+                  250,
+                ]}
+                repeat={Infinity}
+                className="text-3xl font-bold tracking-[0.2em] text-emerald-400 md:text-7xl"
+              />
+            </div>
+          </div>
+        </div>
+      </main>
     )
   }
 
   return (
-    <div className='min-h-screen flex md:flex-row flex-col md:p-10 w-full'>
+    <main className='flex min-h-[calc(100vh-4rem)] w-full flex-col px-3 pb-8 pt-24 sm:px-4 sm:pt-28 md:min-h-screen md:p-10'>
       <Head>
   <title>Projects — Syed Yashin Hussain | Web Developer Portfolio</title>
 
@@ -130,34 +154,34 @@ export default function Projects() {
   <meta name="twitter:image" content="https://syeds.in/images/preview.png" />
 </Head>
 
-        <div className="w-full h-full overflow-scroll border-4 border-[var(--border-color)] md:overflow-hidden p-8 md:p-16 bg-white/70 dark:bg-[#0F172A]/70 backdrop-blur-md">
+        <div className="w-full border-4 border-[var(--border-color)] bg-white/70 p-4 backdrop-blur-md dark:bg-[#0F172A]/70 sm:p-6 md:p-10 lg:p-16">
           <div className="max-w-7xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold mb-8 text-[var(--text-color)] border-b-4 border-[var(--border-color)] pb-2">
+            <h1 className="mb-6 border-b-4 border-[var(--border-color)] pb-2 text-3xl font-bold text-[var(--text-color)] sm:text-4xl md:mb-8 md:text-5xl">
               My Projects
             </h1>
 
             <div className="mb-8 space-y-4">
               {/* Search and Filter Controls */}
-              <div className="flex flex-col md:flex-row gap-4 justify-between  items-start md:items-center">
+              <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <div className="w-full md:w-auto">
                   <input
                     type="text"
                     placeholder="Search projects..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full md:w-64 px-4 py-2 bg-emerald-100 border-4 border-emerald-700 text-slate-900 focus:outline-none dark:bg-slate-900 dark:border-emerald-400 dark:text-emerald-100"
+                    className="w-full px-4 py-3 text-base bg-emerald-100 border-4 border-emerald-700 text-slate-900 focus:outline-none dark:bg-slate-900 dark:border-emerald-400 dark:text-emerald-100 md:w-64"
                   />
                 </div>
 
-                <div className="flex items-center gap-4">
-                <div className="w-60">
+                <div className="flex w-full flex-col gap-4 sm:flex-row sm:items-center md:w-auto">
+                <div className="w-full sm:w-60">
       <Listbox
           value={selected}
           onChange={(option) => 
           {setSelected(option) 
           setSortBy(option.value)}}>
         <div className="relative">
-          <Listbox.Button className="relative w-full cursor-pointer border-4 border-emerald-700 bg-emerald-100 py-2 pl-4 pr-10 text-left text-slate-900 focus:outline-none dark:bg-slate-900 dark:border-emerald-400 dark:text-emerald-100">
+          <Listbox.Button className="relative w-full cursor-pointer border-4 border-emerald-700 bg-emerald-100 py-3 pl-4 pr-10 text-left text-base text-slate-900 focus:outline-none dark:bg-slate-900 dark:border-emerald-400 dark:text-emerald-100">
             <span className="block truncate">{selected.label}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
               <ChevronUpDownIcon className="h-5 w-5 text-green-600 rounded-sm" >{selected.label}</ChevronUpDownIcon>
@@ -203,7 +227,7 @@ export default function Projects() {
       </Listbox>
     </div>
 
-            <label className="flex items-center gap-2 text-[var(--text-color)]">
+            <label className="flex min-h-11 items-center gap-2 text-[var(--text-color)]">
                     <input
                       type="checkbox"
                       checked={showForks}
@@ -245,7 +269,7 @@ export default function Projects() {
 
             {/* Projects Grid */}
             <motion.div
-              className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-4 gap-2 h-full"
+              className="grid h-full grid-cols-1 gap-3 sm:gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
               layout
             >
               {sortedRepos.map((repo, index) => (
@@ -257,18 +281,18 @@ export default function Projects() {
                   initial={{ opacity: 0, y: 12, scale: 0.96 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   transition={{ duration: 0.35, delay: index * 0.04, ease: [0.16, 1, 0.3, 1] }}
-                  className="block p-6 bg-[var(--card-bg)] text-[var(--text-color)] border-4 border-[var(--border-color)] hover:-translate-y-1 transition-transform"
+                  className="block border-4 border-[var(--border-color)] bg-[var(--card-bg)] p-4 text-[var(--text-color)] transition-transform hover:-translate-y-1 sm:p-5 md:p-6"
                 >
-                  <div className="flex items-start justify-between mb-2 overflow-clip transition-transform">
-                    <h3 className="text-xl font-semibold">{repo.name}</h3>
+                  <div className="mb-2 flex items-start justify-between gap-3 overflow-hidden transition-transform">
+                    <h3 className="min-w-0 break-words text-lg font-semibold sm:text-xl">{repo.name}</h3>
                     {repo.fork && (
-                      <span className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-1 rounded">
+                      <span className="surface-badge rounded px-2 py-1 text-xs">
                         Fork
                       </span>
                     )}
                   </div>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">{repo.description}</p>
-                  <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
+                  <p className="surface-copy mb-4 line-clamp-3 text-sm sm:text-base">{repo.description}</p>
+                  <div className="surface-copy-muted flex items-center justify-between text-sm">
                     <span className="flex items-center">
                       <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
@@ -281,6 +305,6 @@ export default function Projects() {
             </motion.div>
           </div>
         </div>
-      </div>
+      </main>
   )
 }

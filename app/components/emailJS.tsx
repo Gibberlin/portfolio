@@ -35,14 +35,14 @@ export default function EmailForm() {
   };
 
   return (
-    <form ref={form} onSubmit={sendEmail} className="space-y-4 w-full font-serif ">
+    <form ref={form} onSubmit={sendEmail} className="w-full space-y-4 font-serif">
       <div>
         <input
           type="text"
           name="user_name"
           placeholder="Your Name"
           required
-          className="w-full p-2 border rounded dark:bg-blue-950 bg-blue-200 border-blue-700"
+          className="surface-input w-full rounded border p-3 text-base"
         />
       </div>
       <div>
@@ -51,7 +51,7 @@ export default function EmailForm() {
           name="user_email"
           placeholder="Your Email"
           required
-          className="w-full p-2 border rounded dark:bg-blue-950 bg-blue-200 border-blue-700"
+          className="surface-input w-full rounded border p-3 text-base"
         />
       </div>
       <div>
@@ -59,13 +59,13 @@ export default function EmailForm() {
           name="message"
           placeholder="Your Message"
           required
-          className="w-full p-2 border rounded h-32 dark:bg-blue-950 bg-blue-200 border-blue-700"
+          className="surface-input h-32 w-full rounded border p-3 text-base"
         />
       </div>
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full bg-green-600 text-white p-2 rounded hover:bg-green-700 disabled:opacity-50"
+        className="min-h-11 w-full rounded bg-green-600 p-3 text-base text-white hover:bg-green-700 disabled:opacity-50"
       >
         {isSubmitting ? 'Sending...' : 'Send Message'}
       </button>
