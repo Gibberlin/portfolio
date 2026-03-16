@@ -1,5 +1,8 @@
+"use client";
+
 import MacintoshSprite, { MAC_SCREEN_BOUNDS } from "@/app/components/macintosh-sprite";
 import Sprint from "@/app/components/sprint";
+import LoadingMusicButton from "@/app/components/loading-music-button";
 
 const monitorScreenStyle = {
   left: `${(MAC_SCREEN_BOUNDS.monitor.x / MAC_SCREEN_BOUNDS.monitor.viewBoxWidth) * 100}%`,
@@ -28,6 +31,9 @@ export default function LoadingScreen({ overlay = false }: LoadingScreenProps) {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(8,14,10,0.12),rgba(8,14,10,0.28))]"
       />
+      <div className="absolute right-4 top-4 z-20 sm:right-6 sm:top-6">
+        <LoadingMusicButton />
+      </div>
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-4 top-1/2 h-48 -translate-y-1/2 animate-terminal-glow rounded-[2rem] bg-[radial-gradient(circle_at_center,rgba(30,238,12,0.18),transparent_70%)] blur-3xl"

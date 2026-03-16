@@ -213,13 +213,19 @@ canvas {
   }
 
   .terminal-cta {
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
     position: relative;
     overflow: hidden;
+    isolation: isolate;
     border: 4px solid rgb(52 211 153 / 0.9);
     background:
       linear-gradient(180deg, rgb(9 18 14 / 0.92), rgb(7 12 10 / 0.98));
     color: rgb(167 243 208);
     text-shadow: 0 0 10px rgb(74 222 128 / 0.28);
+    clip-path: inset(0);
     transition:
       transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
       box-shadow 180ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -408,7 +414,8 @@ canvas {
 
   .runner-clouds,
   .runner-hills,
-  .runner-ground {
+  .runner-ground,
+  .runner-ufo-track {
     position: absolute;
     inset-inline: 0;
     pointer-events: none;
@@ -425,7 +432,7 @@ canvas {
       radial-gradient(circle at 43% 38%, rgb(255 255 255 / 0.58) 0 0.92rem, transparent 0.96rem),
       radial-gradient(circle at 72% 32%, rgb(255 255 255 / 0.68) 0 0.78rem, transparent 0.82rem),
       radial-gradient(circle at 77% 44%, rgb(255 255 255 / 0.56) 0 0.94rem, transparent 0.98rem);
-    animation: runner-clouds 18s linear infinite;
+    animation: runner-clouds 2.4s linear forwards;
   }
 
   .runner-hills {
@@ -448,7 +455,28 @@ canvas {
         rgb(10 38 16 / 0.94) 0 1rem,
         rgb(18 58 22 / 0.94) 1rem 2rem
       );
-    animation: runner-ground 1.1s linear infinite;
+    animation: runner-ground 2.4s linear forwards;
+  }
+
+  .runner-ufo-track {
+    top: 0.75rem;
+    left: 0;
+    right: 0;
+    height: 4.5rem;
+    z-index: 4;
+  }
+
+  .runner-ufo {
+    position: absolute;
+    top: 0;
+    left: -0.75rem;
+    width: 4.5rem;
+    height: 4.5rem;
+    object-fit: contain;
+    filter:
+      drop-shadow(0 0 8px rgb(30 238 12 / 0.24))
+      drop-shadow(0 8px 10px rgb(17 17 17 / 0.2));
+    animation: runner-ufo-chase 2.4s linear forwards;
   }
 
   .runner-ground::before {
@@ -460,24 +488,193 @@ canvas {
     background: linear-gradient(90deg, rgb(109 230 67 / 0.9), rgb(250 204 21 / 0.7), rgb(109 230 67 / 0.9));
   }
 
-  .runner {
+  .runner-rig {
     position: absolute;
-    left: 18%;
-    bottom: 1rem;
-    width: 56px;
-    height: 56px;
-    overflow: hidden;
-    filter:
-      drop-shadow(0 3px 0 rgb(17 17 17 / 0.4))
-      drop-shadow(0 0 10px rgb(30 238 12 / 0.08));
+    left: 0.5rem;
+    bottom: 0.7rem;
+    width: 8.5rem;
+    height: 5.4rem;
+    z-index: 5;
+    animation: runner-bike-chase 2.4s linear forwards;
   }
 
-  .runner-strip {
+  .bike-shadow {
+    position: absolute;
+    left: 1rem;
+    bottom: 0.55rem;
+    width: 6.75rem;
+    height: 0.95rem;
+    border-radius: 999px;
+    background: rgb(8 14 10 / 0.36);
+    filter: blur(2px);
+    transform-origin: center center;
+    animation: bike-shadow 2.4s linear forwards;
+  }
+
+  .bike {
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 3.5rem;
+  }
+
+  .bike-wheel {
+    position: absolute;
+    bottom: 0;
+    width: 2rem;
+    height: 2rem;
+    border: 3px solid rgb(215 243 255 / 0.92);
+    border-radius: 999px;
+    background:
+      radial-gradient(circle at center, rgb(9 18 14 / 0.95) 0 18%, transparent 20%),
+      conic-gradient(
+        from 0deg,
+        transparent 0deg 26deg,
+        rgb(167 243 208 / 0.8) 26deg 34deg,
+        transparent 34deg 56deg,
+        rgb(167 243 208 / 0.72) 56deg 64deg,
+        transparent 64deg 86deg,
+        rgb(167 243 208 / 0.75) 86deg 94deg,
+        transparent 94deg 360deg
+      );
+    box-shadow:
+      inset 0 0 0 2px rgb(17 17 17 / 0.5),
+      0 0 10px rgb(76 201 240 / 0.12);
+    animation: bike-wheel-spin 2.4s linear forwards;
+  }
+
+  .bike-wheel--rear {
+    left: 0.2rem;
+  }
+
+  .bike-wheel--front {
+    right: 0.55rem;
+  }
+
+  .bike-wheel__hub {
+    position: absolute;
+    inset: 50% auto auto 50%;
+    width: 0.45rem;
+    height: 0.45rem;
+    transform: translate(-50%, -50%);
+    border-radius: 999px;
+    background: rgb(255 214 102 / 0.96);
+    box-shadow: 0 0 0 1px rgb(17 17 17 / 0.5);
+  }
+
+  .bike-frame,
+  .bike-seat,
+  .bike-handlebar,
+  .bike-basket,
+  .bike-pedal {
+    position: absolute;
     display: block;
-    width: 576px;
-    height: 48px;
-    transform-origin: left bottom;
-    animation: runner-sprite 0.9s steps(12, end) infinite;
+    background: rgb(255 159 28 / 0.96);
+    box-shadow: 0 0 0 1px rgb(17 17 17 / 0.35);
+  }
+
+  .bike-frame--top {
+    left: 2.15rem;
+    bottom: 1.9rem;
+    width: 2.3rem;
+    height: 0.28rem;
+    transform: rotate(-14deg);
+    transform-origin: left center;
+  }
+
+  .bike-frame--down {
+    left: 4rem;
+    bottom: 1.3rem;
+    width: 1.95rem;
+    height: 0.28rem;
+    transform: rotate(28deg);
+    transform-origin: left center;
+  }
+
+  .bike-frame--seat {
+    left: 3rem;
+    bottom: 1.2rem;
+    width: 1.65rem;
+    height: 0.28rem;
+    transform: rotate(58deg);
+    transform-origin: left center;
+  }
+
+  .bike-frame--fork {
+    right: 2rem;
+    bottom: 1.4rem;
+    width: 1.5rem;
+    height: 0.28rem;
+    transform: rotate(-54deg);
+    transform-origin: right center;
+  }
+
+  .bike-seat {
+    left: 3.15rem;
+    bottom: 2.7rem;
+    width: 0.95rem;
+    height: 0.32rem;
+    background: rgb(247 243 154 / 0.95);
+  }
+
+  .bike-handlebar {
+    right: 1.9rem;
+    bottom: 2.55rem;
+    width: 1rem;
+    height: 0.28rem;
+    background: rgb(76 201 240 / 0.95);
+  }
+
+  .bike-basket {
+    right: 0.75rem;
+    bottom: 1.95rem;
+    width: 0.8rem;
+    height: 0.78rem;
+    background:
+      repeating-linear-gradient(
+        180deg,
+        rgb(244 211 94 / 0.92) 0 2px,
+        rgb(185 135 36 / 0.92) 2px 4px
+      );
+  }
+
+  .bike-pedal {
+    left: 4.25rem;
+    bottom: 1.3rem;
+    width: 0.8rem;
+    height: 0.22rem;
+    background: rgb(124 245 139 / 0.96);
+    animation: bike-pedal-tilt 2.4s linear forwards;
+  }
+
+  .runner-shell {
+    position: absolute;
+    left: 1.1rem;
+    bottom: 1.35rem;
+    width: 62px;
+    height: 62px;
+    transform-origin: center bottom;
+    animation: bike-rider-bob 2.4s linear forwards;
+  }
+
+  .runner {
+    position: absolute;
+    inset: 0;
+    width: 62px;
+    height: 62px;
+    filter:
+      drop-shadow(0 3px 0 rgb(17 17 17 / 0.4))
+      drop-shadow(0 0 10px rgb(30 238 12 / 0.08))
+      drop-shadow(1px 0 0 rgb(17 17 17 / 0.95))
+      drop-shadow(-1px 0 0 rgb(17 17 17 / 0.95))
+      drop-shadow(0 1px 0 rgb(17 17 17 / 0.95))
+      drop-shadow(0 -1px 0 rgb(17 17 17 / 0.95));
+  }
+
+  .runner-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 }
 
@@ -555,23 +752,13 @@ canvas {
   }
 }
 
-@keyframes runner-sprite {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-576px);
-  }
-}
-
 @keyframes runner-clouds {
   from {
     transform: translateX(0);
   }
 
   to {
-    transform: translateX(-6rem);
+    transform: translateX(-1.1rem);
   }
 }
 
@@ -581,7 +768,174 @@ canvas {
   }
 
   to {
-    background-position-x: -2rem;
+    background-position-x: -4.5rem;
+  }
+}
+
+@keyframes runner-ufo-chase {
+  0% {
+    left: -0.75rem;
+    transform: translate3d(0, 0, 0) scale(0.92);
+  }
+
+  18% {
+    left: 10%;
+    transform: translate3d(0, 0.1rem, 0) scale(0.96);
+  }
+
+  42% {
+    left: 34%;
+    transform: translate3d(0, -0.15rem, 0) scale(1);
+  }
+
+  68% {
+    left: 62%;
+    transform: translate3d(0, -0.05rem, 0) scale(1.02);
+  }
+
+  100% {
+    left: calc(100% - 5.5rem);
+    transform: translate3d(0, -0.35rem, 0) scale(0.94);
+  }
+}
+
+@keyframes runner-bike-chase {
+  0% {
+    left: 0.5rem;
+    transform: translate3d(0, 0, 0);
+  }
+
+  18% {
+    left: 12%;
+    transform: translate3d(0, -0.02rem, 0);
+  }
+
+  42% {
+    left: 38%;
+    transform: translate3d(0, 0.04rem, 0);
+  }
+
+  68% {
+    left: 66%;
+    transform: translate3d(0, -0.01rem, 0);
+  }
+
+  100% {
+    left: calc(100% - 8.8rem);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes bike-shadow {
+  0%,
+  100% {
+    left: 1rem;
+    opacity: 0.3;
+    transform: scaleX(1) scaleY(1);
+  }
+
+  18% {
+    left: 13%;
+    opacity: 0.3;
+    transform: scaleX(1.02) scaleY(0.98);
+  }
+
+  42% {
+    left: 39%;
+    opacity: 0.28;
+    transform: scaleX(0.98) scaleY(1);
+  }
+
+  68% {
+    left: 67%;
+    opacity: 0.3;
+    transform: scaleX(1.03) scaleY(0.98);
+  }
+}
+
+@keyframes bike-wheel-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(2520deg);
+  }
+}
+
+@keyframes bike-pedal-tilt {
+  0% {
+    transform: rotate(18deg);
+  }
+
+  12.5% {
+    transform: rotate(-18deg);
+  }
+
+  25% {
+    transform: rotate(18deg);
+  }
+
+  37.5% {
+    transform: rotate(-18deg);
+  }
+
+  50% {
+    transform: rotate(18deg);
+  }
+
+  62.5% {
+    transform: rotate(-18deg);
+  }
+
+  75% {
+    transform: rotate(18deg);
+  }
+
+  87.5% {
+    transform: rotate(-18deg);
+  }
+
+  100% {
+    transform: rotate(18deg);
+  }
+}
+
+@keyframes bike-rider-bob {
+  0% {
+    transform: translateY(0);
+  }
+
+  12.5% {
+    transform: translateY(0.08rem);
+  }
+
+  25% {
+    transform: translateY(0);
+  }
+
+  37.5% {
+    transform: translateY(0.08rem);
+  }
+
+  50% {
+    transform: translateY(0);
+  }
+
+  62.5% {
+    transform: translateY(0.08rem);
+  }
+
+  75% {
+    transform: translateY(0);
+  }
+
+  87.5% {
+    transform: translateY(0.08rem);
+  }
+
+  100% {
+    transform: translateY(0);
   }
 }
 
@@ -597,7 +951,12 @@ canvas {
   .animate-terminal-glow,
   .runner-clouds,
   .runner-ground,
-  .runner-strip,
+  .runner-ufo,
+  .runner-rig,
+  .bike-shadow,
+  .bike-wheel,
+  .bike-pedal,
+  .runner-shell,
   .terminal-cta-label::before,
   .menu-item::before,
   .menu-item:hover::before,

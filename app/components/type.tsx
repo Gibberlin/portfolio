@@ -19,13 +19,15 @@ const monitorScreenStyle = {
 };
 
 const typeSequence = [
-  "Hello, I'm Yashin!",
+  "Hello, Visitor 👽",
   2000,
-  "I'm a Student",
+  "I'm a Yashin",
   1000,
   "A Developer",
   1200,
   "And a Designer",
+  1200,
+  "And a Student",
   1200,
 ];
 

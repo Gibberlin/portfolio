@@ -1,5 +1,4 @@
 "use client"
-import Link from "next/link";
 import React from 'react'
 import { motion } from 'framer-motion'
 
@@ -8,20 +7,21 @@ const easeOut = [0.22, 1, 0.36, 1] as const;
 const Hero = () => {
   const ctaItems = [
     {
-      href: "/projects",
+      href: "https://github.com/Gibberlin",
       label: "MY WORK",
+      external: true,
     },
     {
-      href: "/Syed-Yashin-Hussain-Resume.txt",
+      href: "https://drive.google.com/file/d/1dqa3-B9wFCfOD78wgKGlnTLgPnCcCOTp/view?usp=sharing",
       label: "DOWNLOAD RESUME",
-      download: true,
+      external: true,
     },
   ]
 
   return (
     <div className="flex justify-center">
       <ul className="flex w-full flex-col gap-4 text-center text-lg font-extrabold text-emerald-300 sm:text-2xl md:flex-row md:justify-center">
-        {ctaItems.map(({ href, label, download }, index) => (
+        {ctaItems.map(({ href, label }, index) => (
           <motion.li
             key={label}
             initial={{ opacity: 0, y: 18 }}
@@ -31,17 +31,18 @@ const Hero = () => {
               delay: 0.32 + (index * 0.12),
               ease: easeOut,
             }}
-            whileHover={{ y: -3, scale: 1.02 }}
+            whileHover={{ y: -3 }}
             whileTap={{ scale: 0.98 }}
             className="w-full md:w-auto"
           >
-            <Link
+            <a
               href={href}
-              download={download}
+              target="_blank"
+              rel="noopener noreferrer"
               className="terminal-cta w-full px-4 py-3 md:min-w-[16rem]"
             >
               <span className="terminal-cta-label">{label}</span>
-            </Link>
+            </a>
           </motion.li>
         ))}
       </ul>
