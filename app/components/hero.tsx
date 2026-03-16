@@ -2,6 +2,8 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 
+const easeOut = [0.22, 1, 0.36, 1] as const;
+
 const Hero = () => {
   const ctaItems = [
     "MY WORK",
@@ -19,7 +21,7 @@ const Hero = () => {
             transition={{
               duration: 0.45,
               delay: 0.32 + (index * 0.12),
-              ease: [0.22, 1, 0.36, 1],
+              ease: easeOut,
             }}
             whileHover={{ y: -3, scale: 1.02 }}
             whileTap={{ scale: 0.98 }}

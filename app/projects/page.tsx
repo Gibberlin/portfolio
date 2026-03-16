@@ -23,6 +23,8 @@ const options = [
   {id:2, value: "created", label: "Recently Created"},
 ]
 
+const easeOut = [0.16, 1, 0.3, 1] as const;
+
 export default function Projects() {
 
   const [repos, setRepos] = useState<GitHubRepo[]>([])
@@ -280,7 +282,7 @@ export default function Projects() {
                   rel="noopener noreferrer"
                   initial={{ opacity: 0, y: 12, scale: 0.96 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ duration: 0.35, delay: index * 0.04, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.35, delay: index * 0.04, ease: easeOut }}
                   className="block border-4 border-[var(--border-color)] bg-[var(--card-bg)] p-4 text-[var(--text-color)] transition-transform hover:-translate-y-1 sm:p-5 md:p-6"
                 >
                   <div className="mb-2 flex items-start justify-between gap-3 overflow-hidden transition-transform">

@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 
+const easeOut = [0.22, 1, 0.36, 1] as const;
+
 const profile = [
   { label: "Name", value: "Gibberlin😎" },
   { label: "Class", value: "Software Developer" },
@@ -44,7 +46,7 @@ const item = {
     y: 0,
     transition: {
       duration: 0.42,
-      ease: [0.22, 1, 0.36, 1],
+      ease: easeOut,
     },
   },
 };
@@ -96,7 +98,7 @@ export default function PlayerStats() {
                   transition={{
                     duration: 0.45,
                     delay: 0.34 + (index * 0.1),
-                    ease: [0.22, 1, 0.36, 1],
+                    ease: easeOut,
                   }}
                 >
                   <div className="player-skill-bar" aria-hidden="true">
@@ -111,7 +113,7 @@ export default function PlayerStats() {
                           transition={{
                             duration: 0.2,
                             delay: 0.44 + (index * 0.1) + (segmentIndex * 0.045),
-                            ease: [0.22, 1, 0.36, 1],
+                            ease: easeOut,
                           }}
                           className={active ? "player-skill-segment is-active" : "player-skill-segment"}
                         >
