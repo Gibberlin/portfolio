@@ -7,6 +7,7 @@ import {Silkscreen} from "next/font/google"
 import AnalyticsWrapper from "@/app/components/analytics";
 import RouteTransition from "@/app/components/route-transition";
 import BackgroundPulse from "@/app/components/background-pulse";
+import InitialLoadingGate from "@/app/components/initial-loading-gate";
 
 const silkscreen = Silkscreen({
   weight: "400",
@@ -56,13 +57,14 @@ export default function RootLayout({
       >
         <AnalyticsWrapper />
       <ThemeProvider defaultTheme="dark" attribute="class" enableSystem >
+        <InitialLoadingGate>
         <div className="relative min-h-screen overflow-clip">
           <div
             aria-hidden="true"
             className="background-scene pointer-events-none fixed inset-0 z-0 bg-cover bg-center bg-no-repeat md:bg-bottom"
             style={{
               backgroundColor: "var(--background)",
-              backgroundImage: "url('/images/.picasaoriginals/background.jpg')",
+              backgroundImage: "url('/images/background.jpg')",
             }}
           />
           <div
@@ -75,6 +77,7 @@ export default function RootLayout({
             <RouteTransition>{children}</RouteTransition>
           </div>
         </div>
+        </InitialLoadingGate>
       </ThemeProvider>
       </body>
     </html>

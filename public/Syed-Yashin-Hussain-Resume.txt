@@ -1,0 +1,32 @@
+Syed Yashin Hussain
+Web Developer and B.Tech CSE Student
+
+Summary
+Passionate software and web developer focused on building efficient, scalable, and user-friendly applications.
+
+Core Skills
+- JavaScript
+- TypeScript
+- React
+- Next.js
+- Node.js
+- ExpressJS
+- MySQL
+- Firebase
+- Python
+- Java
+- C++
+
+Additional Tools
+- Git and GitHub
+- Blender
+- GIMP
+- Figma
+- Inkscape
+- Adobe Photoshop
+- Adobe Illustrator
+
+Links
+- Portfolio: https://syeds.in/
+- GitHub: https://github.com/Gibberlin
+- LinkedIn: https://linkedin.com/in/syed-yashin-hussain-74b206146

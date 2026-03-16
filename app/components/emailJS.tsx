@@ -37,25 +37,39 @@ export default function EmailForm() {
   return (
     <form ref={form} onSubmit={sendEmail} className="w-full space-y-4 font-serif">
       <div>
+        <label htmlFor="user_name" className="mb-2 block text-sm uppercase tracking-[0.14em] text-[var(--text-color)]">
+          Name
+        </label>
         <input
+          id="user_name"
           type="text"
           name="user_name"
           placeholder="Your Name"
+          autoComplete="name"
           required
           className="surface-input w-full rounded border p-3 text-base"
         />
       </div>
       <div>
+        <label htmlFor="user_email" className="mb-2 block text-sm uppercase tracking-[0.14em] text-[var(--text-color)]">
+          Email
+        </label>
         <input
+          id="user_email"
           type="email"
           name="user_email"
           placeholder="Your Email"
+          autoComplete="email"
           required
           className="surface-input w-full rounded border p-3 text-base"
         />
       </div>
       <div>
+        <label htmlFor="message" className="mb-2 block text-sm uppercase tracking-[0.14em] text-[var(--text-color)]">
+          Message
+        </label>
         <textarea
+          id="message"
           name="message"
           placeholder="Your Message"
           required
@@ -69,12 +83,14 @@ export default function EmailForm() {
       >
         {isSubmitting ? 'Sending...' : 'Send Message'}
       </button>
-      {submitStatus === 'success' && (
-        <p className="text-green-600">Message sent successfully!</p>
-      )}
-      {submitStatus === 'error' && (
-        <p className="text-red-600">Failed to send message. Please try again.</p>
-      )}
+      <div aria-live="polite" aria-atomic="true" className="min-h-6">
+        {submitStatus === 'success' && (
+          <p className="text-green-600">Message sent successfully!</p>
+        )}
+        {submitStatus === 'error' && (
+          <p className="text-red-600">Failed to send message. Please try again.</p>
+        )}
+      </div>
     </form>
   );
 }

@@ -29,6 +29,7 @@ export default function Projects() {
 
   const [repos, setRepos] = useState<GitHubRepo[]>([])
   const [loading, setLoading] = useState(true)
+  const [errorMessage, setErrorMessage] = useState("")
   const [filter, setFilter] = useState('all')
   const [sortBy, setSortBy] = useState('updated')
   const [searchQuery, setSearchQuery] = useState('')
@@ -42,18 +43,25 @@ export default function Projects() {
         const response = await fetch(
           'https://api.github.com/users/Gibberlin/repos?per_page=100'
         )
+        if (!response.ok) {
+          throw new Error(`GitHub request failed with status ${response.status}`)
+        }
         const data = await response.json()
-        if (isActive) {
+        if (isActive && Array.isArray(data)) {
           setRepos(data)
+          setErrorMessage("")
+        } else if (isActive) {
+          setErrorMessage("Unable to load projects right now.")
         }
       } catch (error) {
         console.error('Error fetching GitHub repos:', error)
+        if (isActive) {
+          setErrorMessage("Unable to load projects right now. Please try again later.")
+        }
       } finally {
-        window.setTimeout(() => {
-          if (isActive) {
-            setLoading(false)
-          }
-        }, 1000)
+        if (isActive) {
+          setLoading(false)
+        }
       }
     }
   
@@ -63,10 +71,6 @@ export default function Projects() {
       isActive = false
     }
   }, [])
-
-  useEffect(() => {
-    console.log("Sorting by:", sortBy)
-  }, [sortBy])
 
   const filteredRepos = repos.filter(repo => {
     // Filter by search query
@@ -166,8 +170,13 @@ export default function Projects() {
               {/* Search and Filter Controls */}
               <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <div className="w-full md:w-auto">
+                  <label htmlFor="project-search" className="sr-only">
+                    Search projects
+                  </label>
                   <input
+                    id="project-search"
                     type="text"
+                    aria-label="Search projects"
                     placeholder="Search projects..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
@@ -177,16 +186,23 @@ export default function Projects() {
 
                 <div className="flex w-full flex-col gap-4 sm:flex-row sm:items-center md:w-auto">
                 <div className="w-full sm:w-60">
+      <label htmlFor="project-sort" className="sr-only">
+        Sort projects
+      </label>
       <Listbox
           value={selected}
           onChange={(option) => 
           {setSelected(option) 
           setSortBy(option.value)}}>
         <div className="relative">
-          <Listbox.Button className="relative w-full cursor-pointer border-4 border-emerald-700 bg-emerald-100 py-3 pl-4 pr-10 text-left text-base text-slate-900 focus:outline-none dark:bg-slate-900 dark:border-emerald-400 dark:text-emerald-100">
+          <Listbox.Button
+            id="project-sort"
+            aria-label="Sort projects"
+            className="relative w-full cursor-pointer border-4 border-emerald-700 bg-emerald-100 py-3 pl-4 pr-10 text-left text-base text-slate-900 focus:outline-none dark:bg-slate-900 dark:border-emerald-400 dark:text-emerald-100"
+          >
             <span className="block truncate">{selected.label}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-              <ChevronUpDownIcon className="h-5 w-5 text-green-600 rounded-sm" >{selected.label}</ChevronUpDownIcon>
+              <ChevronUpDownIcon className="h-5 w-5 rounded-sm text-green-600" aria-hidden="true" />
             </span>
           </Listbox.Button>
 
@@ -268,6 +284,12 @@ export default function Projects() {
                 ))}
               </div>
             </div>
+
+            {errorMessage ? (
+              <p className="border-4 border-[var(--border-color)] bg-[var(--card-bg)] p-4 text-sm text-[var(--text-color)]">
+                {errorMessage}
+              </p>
+            ) : null}
 
             {/* Projects Grid */}
             <motion.div
