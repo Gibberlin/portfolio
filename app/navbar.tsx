@@ -5,6 +5,7 @@ import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {useTheme} from "next-themes";
 import {useEffect, useState} from "react";
+import LoadingMusicButton from "./components/loading-music-button";
 
 const navItems = [
     {href: "/", label: "Home"},
@@ -42,6 +43,7 @@ export default function Navbar() {
                     boxShadow: "var(--nav-shadow)",
                 }}
             >
+                <LoadingMusicButton/>
                 <h1 className="col-start-2 row-start-1 flex w-auto shrink-0 items-center justify-center self-center md:w-full">
                     <Link href="/" aria-label="Home">
                         <Image src={alien} alt="" width={10} height={15} className="m-0.5 p-1 size-10 sm:m-1 sm:size-12 md:m-4 md:size-44 lg:size-48" />

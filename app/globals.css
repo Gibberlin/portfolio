@@ -128,7 +128,7 @@ canvas {
     height: 100vh;
     pointer-events: none;
     z-index: 1;
-    background-image: url('/images/clouds.png');
+    background-image: url('/images/clouds-banner.png');
     background-repeat: repeat-x;
     background-position-x: 0;
     background-size: 1791px auto;
