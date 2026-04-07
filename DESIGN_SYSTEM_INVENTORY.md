@@ -72,13 +72,9 @@ page.tsx
 ├── Type
 ├── Hero
 │   └── CTAs: GitHub, Resume Download
-├── PlayerStats (container)
-│   ├── Profile Info (Name, Role, Type, Location, Edu)
-│   ├── XPBar (Level, XP progress)
-│   ├── AchievementsDisplay (badge grid)
-│   ├── RPGStatsPanel (STR, INT, DEX, WIS)
-│   ├── PersonalityTraits (integrity, discipline, curiosity, etc.)
-│   └── ProfileInsights (strengths, weaknesses, goals, mindset)
+└── PlayerStats (container)
+    ├── Profile Info (Name, Role, Type, Location, Edu)
+    └── Skills Grid
 ```
 
 ### Styling Patterns
@@ -141,67 +137,30 @@ page.tsx
 3. **Projects Grid**:
    - `QuestCard` components (4 per row on desktop)
    - Fetches from GitHub API
-4. **Modal**: `ProjectModal` (opens on QuestCard click)
-
-### QuestCard Styling (`app/components/game/QuestCard.tsx`)
-```jsx
-className="group cursor-pointer border-2 border-emerald-700 dark:border-emerald-600 
-           bg-emerald-900/10 p-4 rounded-lg hover:bg-emerald-900/20 
-           transition-colors h-full flex flex-col"
-```
-- **Issues**: 
-  - Hardcoded `emerald-700` colors (not CSS variables)
-  - Uses Tailwind opacity modifiers (`bg-emerald-900/10`) instead of transparent color tokens
-  - No consistent border pattern with other cards
+4. **Modal**: `ProjectModal` (opens on project card click)
 
 ### ProjectModal Styling (`app/components/game/ProjectModal.tsx`)
-- **Border**: `border-2 border-emerald-600 dark:border-emerald-500`
-- **Background**: `bg-emerald-900/20 p-6 rounded-lg`
-- **Issues**: Same as QuestCard—hardcoded colors, missing design system tokens
+- **Backdrop**: `fixed inset-0 bg-black/60 backdrop-blur-sm` with portal to document.body
+- **Container**: Centered using `translate(-50%, -50%)` with responsive width `min(90vw, 48rem)`
+- **Max Height**: `90vh` with scrollable content
+- **Responsive**: Mobile-optimized text sizes, button layouts, and spacing
+- **Accessibility**: Proper focus management and semantic HTML
 
 ---
 
 ## 6. GAME COMPONENTS & STYLING PATTERNS
 
-### XPBar (`app/components/game/XPBar.tsx`)
-- **Colors**: Uses `emerald-500`, `emerald-400`, `emerald-600` hardcoded
-- **Pattern**: Animated progress bar with glow effect
-- **Issue**: Should use design system accent colors + glow token
-
-### RPGStatsPanel (`app/components/game/RPGStatsPanel.tsx`)
-- **Container**: `border-2 border-emerald-700 bg-emerald-900/20 p-4 rounded-lg`
-- **Title**: `text-emerald-600 dark:text-emerald-400`
-- **Stat Bar**: Shows progress with `bg-emerald-500` + glow
-- **Issue**: Hardcoded emerald across all variants, not using CSS variables
-
-### PersonalityTraits (`app/components/game/PersonalityTraits.tsx`)
-- **Container**: `border-2 border-blue-700 bg-blue-900/20 p-4 rounded-lg`
-- **Title**: `text-blue-600 dark:text-blue-400`
-- **Stat Bars**: `bg-blue-500` with glow
-- **Pattern**: 2-column grid layout
-- **Issue**: Uses BLUE instead of design system colors—should be blue when used as trait system
-
-### ProfileInsights (`app/components/game/ProfileInsights.tsx`)
-- **Container**: `border-2 border-purple-700 bg-purple-900/20 p-4 rounded-lg`
-- **Sections**: Personality Type, Strengths, Weaknesses, Goals, Mindset
-- **Color Scheme**: Multi-color (green, orange, yellow, cyan, indigo, pink)
-- **Issue**: Decorative colors (purple/green/yellow/etc.) hardcoded per section—should reference tokens
-
-### AchievementBadge (`app/components/game/AchievementBadge.tsx`)
-- **Unlocked**: `border-emerald-500 bg-emerald-900/30 shadow-lg shadow-emerald-500/50`
-- **Locked**: `border-gray-500 bg-gray-900/30 opacity-50`
-- **Issue**: Hardcoded emerald/gray colors
+*Note: Game components (XPBar, RPGStatsPanel, PersonalityTraits, ProfileInsights, QuestCard, AchievementBadge) have been pruned in favor of a cleaner codebase. Only ProjectModal remains as the active modal component for project details.*
 
 ---
 
 ## 7. CONSISTENT STYLING PATTERNS
 
-### Borders
-| Pattern | Usage | Issue |
-|---------|-------|-------|
+| Pattern | Usage | Status |
+|---------|-------|--------|
 | `border-4 border-[var(--border-color)]` | Page headers, main containers | ✅ Design system compliant |
-| `border-2 border-emerald-700` | Game panels, cards | ❌ Hardcoded—should use CSS var |
-| `border-blue-700`, `border-purple-700` | Component-specific | ❌ Not systematic |
+| `terminal-panel` | Main content panels | ✅ Design system compliant |
+| `surface-copy`, `surface-copy-muted` | Text variants | ✅ Design system compliant |
 
 ### Cards/Containers
 | Pattern | File | Issue |
@@ -419,14 +378,8 @@ XPBar            → Emerald
 - `app/projects/page.tsx` — Projects page (search, grid, modal)
 - `app/contact/page.tsx` — Contact/socials
 
-**Components - Game System**
-- `app/components/game/RPGStatsPanel.tsx`
-- `app/components/game/XPBar.tsx`
-- `app/components/game/PersonalityTraits.tsx`
-- `app/components/game/ProfileInsights.tsx`
-- `app/components/game/QuestCard.tsx`
+**Components - Modal**
 - `app/components/game/ProjectModal.tsx`
-- `app/components/game/AchievementBadge.tsx`
 
 **Components - Core**
 - `app/components/hero.tsx`
@@ -435,8 +388,7 @@ XPBar            → Emerald
 - `app/components/type.tsx`
 
 **Utilities**
-- `app/hooks/useGameStats.ts`
-- `app/hooks/useAchievementTracking.ts`
+- `app/utils/soundEffects.ts`
 
 ---
 

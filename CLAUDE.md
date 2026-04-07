@@ -92,7 +92,7 @@ A pixel-art inspired, gamified portfolio website for Syed Yashin Hussain — a f
 - Tailwind extends with CSS variable colors
 - `image-rendering: pixelated` applied to pixel art assets
 - Terminal-style reveal animations for staggered content
-- Game mechanics hook into `useGameStats` and `useAchievementTracking`
+- ProjectModal uses React Portal for proper fixed positioning
 - All transitions use cubic-bezier(0.22, 1, 0.36, 1) easing for consistency
 
 ---
