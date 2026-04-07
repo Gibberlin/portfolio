@@ -71,7 +71,6 @@ export default function Projects() {
         
         setRepos(data)
         setErrorMessage("")
-        setErrorType(null)
       } catch (err) {
         clearTimeout(timeoutId)
         if (err instanceof Error && err.name === 'AbortError') {

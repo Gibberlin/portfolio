@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 interface GitHubRepo {
   name: string;
@@ -55,8 +56,13 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
   const [details, setDetails] = useState<GitHubRepoDetails | null>(null);
   const [detailsLoading, setDetailsLoading] = useState(false);
   const [detailsError, setDetailsError] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   const repoName = repo?.name ?? "";
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!isOpen || !repo) {
@@ -101,7 +107,7 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
     };
   }, [isOpen, repoName]);
 
-  if (!repo) return null;
+  if (!repo || !mounted || !isOpen) return null;
 
   const description = details?.description ?? repo.description ?? "";
   const forks = details?.forks_count ?? 0;
@@ -118,103 +124,133 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
   };
 
   const contentVariants = {
-    hidden: { opacity: 0, scale: 0.95, y: 20 },
-    visible: { opacity: 1, scale: 1, y: 0 },
-    exit: { opacity: 0, scale: 0.95, y: 20 },
+    hidden: { opacity: 0, scale: 0.95 },
+    visible: { opacity: 1, scale: 1 },
+    exit: { opacity: 0, scale: 0.95 },
   };
 
-  return (
-    <AnimatePresence>
-      {isOpen && (
+  const modal = (
+    <>
+      <motion.div
+        variants={backgroundVariants}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+        onClick={onClose}
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          zIndex: 40,
+          backgroundColor: 'rgba(0, 0, 0, 0.6)',
+          backdropFilter: 'blur(4px)',
+        }}
+      />
+      <div
+        style={{
+          position: 'fixed',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          zIndex: 50,
+          width: 'min(90vw, 48rem)',
+          maxHeight: '90vh',
+          pointerEvents: 'auto',
+        }}
+      >
         <motion.div
-          variants={backgroundVariants}
+          variants={contentVariants}
           initial="hidden"
           animate="visible"
           exit="exit"
-          onClick={onClose}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+          onClick={e => e.stopPropagation()}
+          className="terminal-panel overflow-y-auto rounded-lg w-full h-full"
+          style={{
+            height: '100%',
+            width: '100%',
+          }}
         >
-          <motion.div
-            variants={contentVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            onClick={e => e.stopPropagation()}
-            className="terminal-panel w-full max-w-2xl max-h-[90vh] overflow-y-auto"
-          >
-            <div className="terminal-panel-inner">
-              <div className="flex items-start justify-between gap-4">
-                <div className="min-w-0">
-                  <p className="surface-copy-muted text-[0.68rem] uppercase tracking-[0.16em] sm:text-xs sm:tracking-[0.24em]">
-                    {detailsLoading ? "Fetching intel…" : "Project intel"}
-                  </p>
-                  <h2 className="mt-2 break-words text-xl font-bold tracking-[0.04em] text-[var(--text-color)] sm:text-3xl sm:tracking-[0.08em]">
-                    📦 {repo.name}
-                  </h2>
-                </div>
-                <button
-                  type="button"
-                  onClick={onClose}
-                  className="shrink-0 rounded border-2 border-[var(--border-color)] bg-[color-mix(in_srgb,var(--card-bg)_86%,transparent)] px-3 py-2 text-sm font-bold text-[var(--text-color)] transition-transform duration-150 ease-out hover:-translate-y-0.5 focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-primary)]"
-                >
-                  ✕ Close
-                </button>
+          <div className="terminal-panel-inner">
+            <div className="flex items-start justify-between gap-4 mb-4">
+              <div className="min-w-0">
+                <p className="surface-copy-muted text-[0.68rem] uppercase tracking-[0.16em] sm:text-xs sm:tracking-[0.24em]">
+                  {detailsLoading ? "Fetching intel…" : "Project intel"}
+                </p>
+                <h2 className="mt-2 break-words text-lg font-bold tracking-[0.04em] text-[var(--text-color)] sm:text-2xl sm:tracking-[0.08em]">
+                  📦 {repo.name}
+                </h2>
               </div>
+              <button
+                type="button"
+                onClick={onClose}
+                className="shrink-0 rounded border-2 border-[var(--border-color)] bg-[color-mix(in_srgb,var(--card-bg)_86%,transparent)] px-2 py-1 text-xs font-bold text-[var(--text-color)] transition-transform duration-150 ease-out hover:-translate-y-0.5 focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-primary)]"
+              >
+                ✕
+              </button>
+            </div>
 
-              <p className="surface-copy mt-4 text-sm leading-relaxed sm:max-w-[58ch] sm:text-base">
-                “{description || "No description yet"}”
+            <p className="surface-copy text-sm leading-relaxed sm:text-base mb-3">
+              "{description || "No description yet"}"
+            </p>
+            {detailsLoading ? (
+              <p className="surface-copy-muted text-xs uppercase tracking-[0.16em] mb-3">
+                Syncing latest repository stats…
               </p>
-              {detailsLoading ? (
-                <p className="surface-copy-muted mt-2 text-xs uppercase tracking-[0.16em]">
-                  Syncing latest repository stats…
-                </p>
-              ) : null}
-              {detailsError ? (
-                <p className="mt-2 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--accent-secondary)]">
-                  Live details unavailable. Showing cached overview.
-                </p>
-              ) : null}
+            ) : null}
+            {detailsError ? (
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--accent-secondary)] mb-3">
+                Live details unavailable. Showing cached overview.
+              </p>
+            ) : null}
 
-              <div className="mt-6 border-t-4 border-[var(--border-color)] pt-4 sm:pt-5">
-                <div className="grid grid-cols-1 gap-1.5 text-sm font-semibold text-[var(--text-color)] sm:flex sm:flex-wrap sm:items-center sm:gap-x-5 sm:gap-y-2">
-                  <span>⭐ {repo.stargazers_count}</span>
-                  <span>🍴 {forks}</span>
-                  <span>🐛 {issues} open issues</span>
-                </div>
-
-                <div className="mt-3 text-sm leading-relaxed text-[var(--text-color)]">
-                  <span className="font-semibold">Language:</span>{" "}
-                  <span className="surface-copy">{language || "Unknown"}</span>
-                  <span className="mx-1.5 surface-copy-muted sm:mx-2">|</span>
-                  <span className="font-semibold">{licenseLabel}</span>
-                </div>
-
-                <div className="mt-2 text-sm text-[var(--muted-text)]">
-                  Last updated: {formatRelativeDays(updatedAt)}
-                </div>
+            <div className="border-t-4 border-[var(--border-color)] pt-3 sm:pt-4 mb-4">
+              <div className="grid grid-cols-2 gap-2 text-xs font-semibold text-[var(--text-color)] sm:flex sm:flex-wrap sm:items-center sm:gap-x-4 sm:gap-y-2 sm:text-sm">
+                <span>⭐ {repo.stargazers_count}</span>
+                <span>🍴 {forks}</span>
+                <span>🐛 {issues}</span>
               </div>
 
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href={repo.html_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex flex-1 items-center justify-center gap-2 border-4 border-[var(--border-color)] bg-[var(--accent-primary)] px-4 py-3 text-sm font-extrabold uppercase tracking-[0.18em] text-black transition-transform duration-150 ease-out hover:-translate-y-0.5 focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-primary)]"
-                >
-                  View on GitHub →
-                </a>
-                <button
-                  type="button"
-                  onClick={onClose}
-                  className="inline-flex flex-1 items-center justify-center gap-2 border-4 border-[var(--border-color)] bg-transparent px-4 py-3 text-sm font-extrabold uppercase tracking-[0.18em] text-[var(--text-color)] transition-transform duration-150 ease-out hover:-translate-y-0.5 focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-primary)]"
-                >
-                  Close
-                </button>
+              <div className="mt-2 text-xs leading-relaxed text-[var(--text-color)] sm:text-sm">
+                <span className="font-semibold">Language:</span>{" "}
+                <span className="surface-copy">{language || "Unknown"}</span>
+                <span className="mx-1 surface-copy-muted sm:mx-1.5">|</span>
+                <span className="font-semibold">{licenseLabel}</span>
+              </div>
+
+              <div className="mt-1 text-xs text-[var(--muted-text)] sm:text-sm">
+                Updated: {formatRelativeDays(updatedAt)}
               </div>
             </div>
-          </motion.div>
+
+            <div className="flex flex-col gap-2 sm:gap-3 sm:flex-row">
+              <a
+                href={repo.html_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex flex-1 items-center justify-center gap-1 border-4 border-[var(--border-color)] bg-[var(--accent-primary)] px-3 py-2 text-xs font-extrabold uppercase tracking-[0.12em] text-black transition-transform duration-150 ease-out hover:-translate-y-0.5 focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-primary)] sm:text-sm sm:px-4 sm:py-3 sm:gap-2 sm:tracking-[0.18em]"
+              >
+                GitHub →
+              </a>
+              <button
+                type="button"
+                onClick={onClose}
+                className="inline-flex flex-1 items-center justify-center gap-1 border-4 border-[var(--border-color)] bg-transparent px-3 py-2 text-xs font-extrabold uppercase tracking-[0.12em] text-[var(--text-color)] transition-transform duration-150 ease-out hover:-translate-y-0.5 focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-primary)] sm:text-sm sm:px-4 sm:py-3 sm:gap-2 sm:tracking-[0.18em]"
+              >
+                Close
+              </button>
+            </div>
+          </div>
         </motion.div>
-      )}
-    </AnimatePresence>
+      </div>
+    </>
+  );
+
+  return createPortal(
+    <AnimatePresence mode="wait">
+      {isOpen ? modal : null}
+    </AnimatePresence>,
+    document.body
   );
 }
