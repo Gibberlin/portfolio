@@ -4,14 +4,16 @@
 
 :root {
   /* Light theme tokens */
-  --page-bg: #60a2ee;        /* sky blue */
+  --page-bg: #e8f4ff;        /* lighter sky blue for better contrast */
   --sidebar-bg: #095b05;     /* forest green */
   --card-bg: #d4e8fc;        /* pixel white */
   --border-color: #111111;   /* pixel black */
   --accent-primary: #1bee0c; /* retro green */
-  --accent-secondary: #dc780e; /* cyan */
-  --text-color: #111111;     /* dark pixel */
-  --muted-text: #6b7280;     /* soft gray */
+  --accent-secondary: #dc780e; /* orange */
+  --accent-social-blue: #0066cc;  /* blue for social icons */
+  --accent-social-pink: #e84b8a;  /* pink for social icons */
+  --text-color: #0a0a0a;     /* darker black for light mode contrast */
+  --muted-text: #4b5563;     /* darker gray for light mode */
   --nav-surface: rgb(255 255 255 / 0.7);
   --nav-text: #0b1c0f;
   --nav-button-bg: rgb(255 255 255 / 0.28);
@@ -29,7 +31,9 @@
   --card-bg: #0F172A;        /* midnight blue */
   --border-color: #D1D5DB;   /* pixel light */
   --accent-primary: #1bee0c; /* retro green */
-  --accent-secondary: #eeaa22; /* cyan */
+  --accent-secondary: #eeaa22; /* warm amber */
+  --accent-social-blue: #3b82f6; /* bright blue for social icons */
+  --accent-social-pink: #ec4899; /* bright pink for social icons */
   --text-color: #F9FAFB;     /* pixel white */
   --muted-text: #94A3B8;     /* soft gray */
   --nav-surface: rgb(15 23 42 / 0.7);
@@ -60,6 +64,40 @@ body {
 @media (max-width: 767px) {
   body {
     padding-bottom: calc(env(safe-area-inset-bottom) + 5.75rem);
+  }
+}
+
+/* Extra-small screens: tighten HUD typography + spacing */
+@media (max-width: 420px) {
+  .terminal-panel-inner {
+    padding: 0.85rem;
+  }
+
+  .player-stats {
+    padding: 0.85rem;
+  }
+
+  .player-skill-row {
+    gap: 0.3rem;
+    font-size: 0.9rem;
+  }
+
+  .player-skill-bar {
+    letter-spacing: 0.05em;
+  }
+
+  .player-skill-segment {
+    transform: none;
+    cursor: default;
+  }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
@@ -113,6 +151,14 @@ canvas {
 
 @layer components {
   .background-scene {
+    background-image: url('/images/background.jpg');
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    /*
+      Prevent extreme upscaling on ultrawide displays.
+      Keeps the scene crisp and avoids visible tearing/pixel stretching.
+    */
+    background-size: clamp(980px, 118vw, 1680px) auto;
     filter: saturate(1) contrast(1) brightness(1);
   }
 
@@ -128,7 +174,7 @@ canvas {
     height: 100vh;
     pointer-events: none;
     z-index: 1;
-    background-image: url('/images/clouds.png');
+    background-image: url('/images/clouds-banner.png');
     background-repeat: repeat-x;
     background-position-x: 0;
     background-size: 1791px auto;
@@ -317,6 +363,14 @@ canvas {
     display: inline-block;
     color: rgb(148 163 184 / 0.72);
     transform-origin: left center;
+    cursor: pointer;
+    transition: transform 150ms ease-out, filter 150ms ease-out;
+  }
+
+  .player-skill-segment:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+    transform: scale(1.1);
   }
 
   .player-skill-segment.is-active {
@@ -326,6 +380,10 @@ canvas {
 
   .player-skill-name {
     color: color-mix(in srgb, var(--text-color) 88%, white 12%);
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .surface-title {
@@ -344,6 +402,13 @@ canvas {
     color: var(--text-color);
     background-color: color-mix(in srgb, var(--card-bg) 88%, white 12%);
     border-color: color-mix(in srgb, var(--border-color) 72%, var(--accent-primary) 28%);
+    transition: border-color 150ms ease-out, box-shadow 150ms ease-out;
+  }
+
+  .surface-input:focus-visible {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-primary) 20%, transparent);
   }
 
   .dark .surface-input {
@@ -527,6 +592,18 @@ canvas {
     width: 100%;
     height: 100%;
     object-fit: contain;
+  }
+}
+
+@media (min-width: 1280px) {
+  .background-scene {
+    background-image: url('/images/backgroundW.png');
+  }
+}
+
+@media (min-width: 1600px) {
+  .background-scene {
+    background-size: 1680px auto;
   }
 }
 

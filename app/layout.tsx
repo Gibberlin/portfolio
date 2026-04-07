@@ -18,7 +18,21 @@ export const metadata: Metadata = {
   title: "Syed Yashin Hussain — Web Developer & Portfolio",
   description:
     "Portfolio of Syed Yashin Hussain — freelance web developer, software projects, skills, and contact info.",
-
+  metadataBase: new URL("https://syeds.in/"),
+  alternates: {
+    canonical: "https://syeds.in/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+  icons: {
+    icon: "/favicon.ico",
+  },
   openGraph: {
     title: "Syed Yashin Hussain — Web Developer",
     description: "Portfolio and projects by Syed Yashin Hussain",
@@ -56,15 +70,20 @@ export default function RootLayout({
         className={`${silkscreen.className} antialiased`}
       >
         <AnalyticsWrapper />
+        <a
+          href="#Main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-[var(--accent-primary)] focus:text-black focus:font-bold focus:rounded"
+        >
+          Skip to main content
+        </a>
       <ThemeProvider defaultTheme="dark" attribute="class" enableSystem >
         <InitialLoadingGate>
         <div className="relative min-h-screen overflow-clip">
           <div
             aria-hidden="true"
-            className="background-scene pointer-events-none fixed inset-0 z-0 bg-cover bg-center bg-no-repeat md:bg-bottom"
+            className="background-scene pointer-events-none fixed inset-0 z-0"
             style={{
               backgroundColor: "var(--background)",
-              backgroundImage: "url('/images/background.jpg')",
             }}
           />
           <div

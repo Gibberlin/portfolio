@@ -20,7 +20,7 @@ const Hero = () => {
 
   return (
     <div className="flex justify-center">
-      <ul className="flex w-full flex-col gap-4 text-center text-lg font-extrabold text-emerald-300 sm:text-2xl md:flex-row md:justify-center">
+      <ul className="flex w-full flex-col gap-4 text-center text-lg font-extrabold text-[var(--accent-primary)] sm:text-2xl md:flex-row md:justify-center">
         {ctaItems.map(({ href, label }, index) => (
           <motion.li
             key={label}

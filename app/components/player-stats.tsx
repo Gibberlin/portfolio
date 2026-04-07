@@ -116,13 +116,15 @@ export default function PlayerStats() {
                             ease: easeOut,
                           }}
                           className={active ? "player-skill-segment is-active" : "player-skill-segment"}
+                          role="presentation"
                         >
                           {active ? "▰" : "▱"}
                         </motion.span>
                       );
                     })}
                   </div>
-                  <span className="player-skill-name">{name}</span>
+                  <span className="player-skill-name truncate" title={`${name}: ${filled} of ${total}`}>{name}</span>
+                  <span className="sr-only">{name}, {filled} of {total} proficiency</span>
                 </motion.div>
               );
             })}
