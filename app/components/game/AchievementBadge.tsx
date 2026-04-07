@@ -1,7 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import type { Achievement } from '@/app/hooks/useGameStats';
+
+interface Achievement {
+  id: string;
+  name: string;
+  icon: string;
+  description?: string;
+}
 
 interface AchievementBadgeProps {
   achievement: Achievement;
