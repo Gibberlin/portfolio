@@ -1,8 +1,6 @@
-'use client'
-import { TypeAnimation } from 'react-type-animation'
-import { Fragment, useEffect, useState } from 'react'
+ 'use client'
+import { Fragment, useEffect, useState, useCallback } from 'react'
 import Head from "next/head";
-import { motion } from 'framer-motion'
 import { Listbox, Transition } from "@headlessui/react"
 import { ChevronUpDownIcon, CheckIcon } from "@heroicons/react/20/solid"
 import { ProjectModal } from '@/app/components/game/ProjectModal'
@@ -39,9 +37,29 @@ export default function Projects() {
   const [selectedRepo, setSelectedRepo] = useState<GitHubRepo | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   
-  const fetchRepos = async () => {
+  const CACHE_KEY = 'syeds_projects_cache_v1'
+
+  const fetchRepos = useCallback(async (force = false) => {
     setLoading(true)
     setErrorMessage("")
+
+    // Serve from cache unless force is true
+    try {
+      if (!force && typeof window !== 'undefined') {
+        const raw = localStorage.getItem(CACHE_KEY)
+        if (raw) {
+          const cached = JSON.parse(raw) as GitHubRepo[]
+          if (Array.isArray(cached) && cached.length > 0) {
+            setRepos(cached)
+            setLoading(false)
+            return
+          }
+        }
+      }
+    } catch (e) {
+      // ignore cache errors and continue to network fetch
+      console.warn('Failed to read projects cache', e)
+    }
     
     try {
       const controller = new AbortController()
@@ -70,6 +88,11 @@ export default function Projects() {
         }
         
         setRepos(data)
+        try {
+          localStorage.setItem(CACHE_KEY, JSON.stringify(data))
+        } catch (e) {
+          console.warn('Failed to write projects cache', e)
+        }
         setErrorMessage("")
       } catch (err) {
         clearTimeout(timeoutId)
@@ -98,11 +121,34 @@ export default function Projects() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
   useEffect(() => {
     fetchRepos()
-  }, [])
+  }, [fetchRepos])
+
+  // Refetch when the window regains focus or becomes visible again
+  useEffect(() => {
+    function handleFocus() {
+      if (repos.length === 0 && !loading) {
+        fetchRepos()
+      }
+    }
+
+    function handleVisibility() {
+      if (document.visibilityState === 'visible') {
+        handleFocus()
+      }
+    }
+
+    window.addEventListener('focus', handleFocus)
+    document.addEventListener('visibilitychange', handleVisibility)
+
+    return () => {
+      window.removeEventListener('focus', handleFocus)
+      document.removeEventListener('visibilitychange', handleVisibility)
+    }
+  }, [repos.length, loading, fetchRepos])
 
   const handleProjectClick = (repo: GitHubRepo) => {
     setSelectedRepo(repo)
@@ -144,7 +190,7 @@ export default function Projects() {
           <title>Projects — Syed Yashin Hussain | Web Developer Portfolio</title>
         </Head>
 
-        <div className="w-full border-4 border-[var(--border-color)] bg-white/70 p-4 backdrop-blur-md dark:bg-[#0F172A]/70 sm:p-6 md:p-10 lg:p-16">
+        <div className="w-full border-4 border-[var(--border-color)] bg-[var(--page-bg)]/70 p-4 backdrop-blur-md dark:bg-[#0F172A]/70 sm:p-6 md:p-10 lg:p-16">
           <div className="mx-auto flex min-h-[24rem] max-w-7xl flex-col justify-center">
             <div className="mb-6 border-b-4 border-[var(--border-color)] pb-2 text-center md:mb-8">
               <h1 className="text-3xl font-bold text-[var(--text-color)] sm:text-4xl md:text-5xl">
@@ -153,16 +199,7 @@ export default function Projects() {
             </div>
 
             <div className="flex flex-1 items-center justify-center py-8 text-center">
-              <TypeAnimation
-                sequence={[
-                  "LOADING...",
-                  250,
-                  "READY!",
-                  250,
-                ]}
-                repeat={Infinity}
-                className="text-3xl font-bold tracking-[0.2em] text-[var(--accent-primary)] md:text-7xl"
-              />
+              <span className="text-3xl font-bold tracking-[0.2em] text-[var(--accent-primary)] md:text-7xl">Loading…</span>
             </div>
           </div>
         </div>
@@ -202,7 +239,7 @@ export default function Projects() {
   <meta name="twitter:image" content="https://syeds.in/images/preview.png" />
 </Head>
 
-        <div className="w-full border-4 border-[var(--border-color)] bg-white/70 p-4 backdrop-blur-md dark:bg-[#0F172A]/70 sm:p-6 md:p-10 lg:p-16">
+        <div className="w-full border-4 border-[var(--border-color)] bg-[var(--page-bg)]/70 p-4 backdrop-blur-md dark:bg-[#0F172A]/70 sm:p-6 md:p-10 lg:p-16">
           <div className="max-w-7xl mx-auto">
             <h1 className="mb-6 border-b-4 border-[var(--border-color)] pb-2 text-3xl font-bold text-[var(--text-color)] sm:text-4xl md:mb-8 md:text-5xl">
               My Projects
@@ -242,11 +279,11 @@ export default function Projects() {
                         <Listbox.Button
                           id="project-sort"
                           aria-label="Sort projects"
-                          className="relative w-full cursor-pointer border-4 border-emerald-700 bg-emerald-100 py-3 pl-4 pr-10 text-left text-base text-slate-900 focus:outline-none dark:bg-slate-900 dark:border-emerald-400 dark:text-emerald-100"
+                          className="relative w-full cursor-pointer border-4 site-border bg-[var(--card-bg)] py-3 pl-4 pr-10 text-left text-base site-text focus:outline-none"
                         >
                           <span className="block truncate">{selected.label}</span>
-                          <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                            <ChevronUpDownIcon className="h-5 w-5 rounded-sm text-green-600" aria-hidden="true" />
+                            <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                            <ChevronUpDownIcon className="h-5 w-5 rounded-sm text-[var(--accent-line)]" aria-hidden="true" />
                           </span>
                         </Listbox.Button>
 
@@ -256,16 +293,14 @@ export default function Projects() {
                           leaveFrom="opacity-100"
                           leaveTo="opacity-0"
                         >
-                          <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto bg-emerald-50 py-1 border-4 border-emerald-700 focus:outline-none dark:bg-slate-900 dark:border-emerald-400">
+                          <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto bg-[var(--card-bg)] py-1 border-4 site-border focus:outline-none">
                             {options.map((option) => (
                               <Listbox.Option
                                 key={option.id}
                                 value={option}
                                 className={({ active }) =>
-                                  `relative cursor-pointer select-none py-2 pl-10 pr-4 text-slate-900 dark:text-emerald-100 ${
-                                    active
-                                      ? "bg-emerald-200 dark:bg-slate-800"
-                                      : "bg-emerald-50 dark:bg-slate-900"
+                                  `relative cursor-pointer select-none py-2 pl-10 pr-4 site-text ${
+                                    active ? "bg-[var(--input-background)]" : "bg-transparent"
                                   }`
                                 }
                               >
@@ -275,7 +310,7 @@ export default function Projects() {
                                       {option.label}
                                     </span>
                                     {selected && (
-                                      <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-green-600">
+                                      <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-[var(--accent-line)]">
                                         <CheckIcon className="h-5 w-5" />
                                       </span>
                                     )}
@@ -312,25 +347,25 @@ export default function Projects() {
                   }`}
                 >
                   All
+                <button
+                    onClick={() => void fetchRepos()}
+                    className="mt-3 px-4 py-2 bg-[var(--accent-primary)] text-[var(--page-bg)] rounded font-semibold hover:shadow-lg transition-all"
+                  >
+                    {loading ? 'Retrying...' : 'Try again'}
                 </button>
-                {languages.map((lang) => (
-                  <button
-                    key={lang}
-                    onClick={() => setFilter(lang)}
-                    className={`px-4 py-2 border-4 transition-colors ${
                       filter === lang
                         ? 'bg-[var(--accent-primary)] text-[var(--page-bg)] border-[var(--border-color)]'
                         : 'bg-[var(--card-bg)] text-[var(--text-color)] border-[var(--border-color)] hover:bg-[var(--accent-secondary)]'
                     }`}
                   >
                     {lang}
+                  <button
+                    onClick={() => void fetchRepos()}
+                    className="mt-3 px-4 py-2 bg-[var(--accent-primary)] text-[var(--page-bg)] rounded font-semibold hover:shadow-lg transition-all"
+                  >
+                    {loading ? 'Retrying...' : 'Try again'}
                   </button>
-                ))}
-              </div>
-            </div>
-
-            {errorMessage ? (
-              <div className="border-4 border-red-600/50 bg-red-600/10 p-4 text-sm text-red-600 dark:bg-red-600/20 dark:text-red-400 space-y-3 rounded">
+              <div className="border-4 status-error p-4 text-sm space-y-3 rounded">
                 <div className="flex items-start gap-3">
                   <span className="text-xl mt-0.5">⚠</span>
                   <div className="flex-1">
@@ -339,9 +374,9 @@ export default function Projects() {
                   </div>
                 </div>
                 <button
-                  onClick={fetchRepos}
+                  onClick={() => void fetchRepos()}
                   disabled={loading}
-                  className="mt-3 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="mt-3 btn-error"
                 >
                   {loading ? 'Retrying...' : 'Try again'}
                 </button>
@@ -361,6 +396,14 @@ export default function Projects() {
               <div className="border-4 border-dashed border-[var(--border-color)] rounded p-12 text-center">
                 <p className="text-lg text-[var(--muted-text)]">No projects found</p>
                 <p className="text-sm text-[var(--muted-text)] mt-2">Check back soon for new projects!</p>
+                <div className="mt-4">
+                  <button
+                    onClick={() => void fetchRepos()}
+                    className="mt-3 px-4 py-2 bg-[var(--accent-primary)] text-black rounded font-semibold hover:shadow-lg transition-all"
+                  >
+                    Reload projects
+                  </button>
+                </div>
               </div>
             )}
 
@@ -369,13 +412,13 @@ export default function Projects() {
               <div className="border-4 border-dashed border-[var(--border-color)] rounded p-12 text-center">
                 <p className="text-lg text-[var(--muted-text)]">No projects match your search</p>
                 <p className="text-sm text-[var(--muted-text)] mt-2">Try changing your search terms or filters</p>
-                <button
-                  onClick={() => {
+                  <button
+                    onClick={() => {
                     setSearchQuery('')
                     setFilter('all')
                     setShowForks(true)
                   }}
-                  className="mt-4 px-4 py-2 bg-[var(--accent-primary)] text-black rounded font-semibold hover:shadow-lg transition-all"
+                  className="mt-4 px-4 py-2 bg-[var(--accent-primary)] text-[var(--page-bg)] rounded font-semibold hover:shadow-lg transition-all"
                 >
                   Clear filters
                 </button>
@@ -384,18 +427,14 @@ export default function Projects() {
 
             {/* Projects Grid */}
             {sortedRepos.length > 0 && (
-            <motion.div
+            <div
               className="grid h-full grid-cols-1 gap-3 sm:gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
-              layout
             >
               {sortedRepos.map((repo, index) => (
-                <motion.button
+                <button
                   key={repo.name}
                   type="button"
                   onClick={() => handleProjectClick(repo)}
-                  initial={{ opacity: 0, y: 12, scale: 0.96 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ duration: 0.35, delay: index * 0.04, ease: easeOut }}
                   className="group flex min-h-[12.5rem] h-full w-full cursor-pointer flex-col border-4 border-[var(--border-color)] bg-[var(--card-bg)] p-4 text-left text-[var(--text-color)] transition-transform duration-150 ease-out hover:-translate-y-1 active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-primary)] sm:p-5 md:p-6"
                 >
                   <div className="mb-2 flex items-start justify-between gap-3 overflow-hidden">
@@ -419,9 +458,9 @@ export default function Projects() {
                       <span className="truncate">{repo.language || 'Unknown'}</span>
                     </span>
                   </div>
-                </motion.button>
+                </button>
               ))}
-            </motion.div>
+            </div>
             )}
           </div>
         </div>

@@ -3,44 +3,75 @@
 @tailwind utilities;
 
 :root {
-  /* Light theme tokens */
-  --page-bg: #e8f4ff;        /* lighter sky blue for better contrast */
-  --sidebar-bg: #095b05;     /* forest green */
-  --card-bg: #d4e8fc;        /* pixel white */
-  --border-color: #111111;   /* pixel black */
-  --accent-primary: #1bee0c; /* retro green */
-  --accent-secondary: #dc780e; /* orange */
-  --accent-social-blue: #0066cc;  /* blue for social icons */
-  --accent-social-pink: #e84b8a;  /* pink for social icons */
-  --text-color: #0a0a0a;     /* darker black for light mode contrast */
-  --muted-text: #4b5563;     /* darker gray for light mode */
-  --nav-surface: rgb(255 255 255 / 0.7);
-  --nav-text: #0b1c0f;
-  --nav-button-bg: rgb(255 255 255 / 0.28);
-  --nav-button-border: rgb(11 28 15 / 0.16);
-  --nav-shadow: 0 16px 34px rgb(8 40 14 / 0.18);
+  /* Light theme (NES/Mario) */
+  --primary-background: #E6F7FF; /* light-bg-primary */
+  --secondary-background: #D4F5F5; /* light-bg-secondary */
+  --deep-accent-background: #FFFFFF; /* light-surface */
+  --main-border: #00CC00; /* light-border */
+  --secondary-border: #00CC00; /* light-accent-line */
+  --accent-line: #00CC00; /* light-accent-line */
+  --main-heading: #111111; /* light-heading */
+  --primary-text: #1A2B3C; /* light-text-primary */
+  --secondary-text: #556677; /* light-text-secondary */
+  --placeholder-text: #8899AA; /* light-placeholder */
+  --input-background: #F2FAFF; /* light-input-bg */
+  --glow-shadow: rgba(0,204,0,0.15);
+  /* Error tokens */
+  --error: #DC2626; /* red-600 */
+  --error-muted: #FCA5A5; /* light red */
+
+  /* Backwards-compatible aliases */
+  --page-bg: var(--primary-background);
+  --sidebar-bg: var(--secondary-background);
+  --card-bg: var(--deep-accent-background);
+  --border-color: var(--main-border);
+  --accent-primary: var(--accent-line);
+  --accent-secondary: var(--secondary-border);
+  --text-color: var(--primary-text);
+  --muted-text: var(--secondary-text);
+  --placeholder-color: var(--placeholder-text);
+  --nav-surface: color-mix(in srgb, var(--primary-background) 88%, transparent);
+  --nav-text: var(--main-heading);
+  --nav-button-bg: color-mix(in srgb, var(--primary-background) 76%, transparent);
+  --nav-button-border: color-mix(in srgb, var(--main-border) 12%, transparent);
+  --nav-shadow: 0 16px 34px var(--glow-shadow);
 
   --background: var(--page-bg);
   --foreground: var(--text-color);
 }
 
 .dark {
-  /* Dark theme tokens */
-  --page-bg: #1B2A41;        /* deep navy */
-  --sidebar-bg: #062b11;     /* dark forest */
-  --card-bg: #0F172A;        /* midnight blue */
-  --border-color: #D1D5DB;   /* pixel light */
-  --accent-primary: #1bee0c; /* retro green */
-  --accent-secondary: #eeaa22; /* warm amber */
-  --accent-social-blue: #3b82f6; /* bright blue for social icons */
-  --accent-social-pink: #ec4899; /* bright pink for social icons */
-  --text-color: #F9FAFB;     /* pixel white */
-  --muted-text: #94A3B8;     /* soft gray */
-  --nav-surface: rgb(15 23 42 / 0.7);
-  --nav-text: #f3fff3;
-  --nav-button-bg: rgb(255 255 255 / 0.08);
-  --nav-button-border: rgb(255 255 255 / 0.16);
-  --nav-shadow: 0 18px 40px rgb(0 0 0 / 0.34);
+  /* Dark theme (NES/Mario) */
+  --primary-background: #001117; /* dark-bg-primary */
+  --secondary-background: #121A2B; /* dark-bg-secondary */
+  --deep-accent-background: #18223A; /* dark-surface */
+  --main-border: #00FF00; /* dark-border */
+  --secondary-border: #66FF66; /* dark-bright-green */
+  --accent-line: #00FF00; /* dark-accent-line */
+  --main-heading: #F0FFE0; /* dark-heading */
+  --primary-text: #E6F1FF; /* dark-text-primary */
+  --secondary-text: #A8B5C7; /* dark-text-secondary */
+  --placeholder-text: #7E8A99; /* dark-placeholder */
+  --input-background: #1F2A44; /* dark-input-bg */
+  --glow-shadow: rgba(0,255,0,0.35);
+  --error: #F87171; /* red-400 */
+  --error-muted: #FCA5A5;
+
+  /* Backwards-compatible aliases */
+  --page-bg: var(--primary-background);
+  --sidebar-bg: var(--secondary-background);
+  --card-bg: var(--deep-accent-background);
+  --border-color: var(--main-border);
+  --accent-primary: var(--accent-line);
+  --accent-secondary: var(--secondary-border);
+  --text-color: var(--primary-text);
+  --muted-text: var(--secondary-text);
+  --placeholder-color: var(--placeholder-text);
+  --nav-surface: color-mix(in srgb, var(--primary-background) 88%, transparent);
+  --nav-text: var(--main-heading);
+  --nav-button-bg: color-mix(in srgb, var(--primary-background) 6%, transparent);
+  --nav-button-border: color-mix(in srgb, var(--main-border) 16%, transparent);
+  --nav-shadow: 0 18px 40px var(--glow-shadow);
 
   --background: var(--page-bg);
   --foreground: var(--text-color);
@@ -199,12 +230,8 @@ canvas {
   .terminal-panel {
     overflow: hidden;
     border: 4px solid var(--border-color);
-    background:
-      linear-gradient(180deg, rgb(255 255 255 / 0.18), rgb(255 255 255 / 0.03)),
-      color-mix(in srgb, var(--card-bg) 76%, transparent);
-    box-shadow:
-      0 0 0 1px rgb(14 17 12 / 0.12),
-      0 22px 45px rgb(8 14 10 / 0.18);
+    background-color: var(--nav-surface);
+    box-shadow: var(--nav-shadow), 0 0 0 1px rgba(14,17,12,0.06);
     backdrop-filter: blur(12px);
   }
 
@@ -236,17 +263,39 @@ canvas {
         transparent 1px,
         transparent 4px
       );
-    opacity: 0.75;
+    opacity: 0.35;
     pointer-events: none;
   }
+
+.dark .terminal-panel::before {
+  opacity: 0.75;
+}
+
+  /* Site-wide semantic helpers for consistent headings and text colors */
+  .site-heading {
+    color: var(--main-heading);
+  }
+
+  .site-text {
+    color: var(--primary-text);
+  }
+
+  .site-muted {
+    color: var(--secondary-text);
+  }
+
+  .site-border {
+    border-color: var(--border-color);
+  }
+  
 
   .terminal-panel-inner {
     position: relative;
     z-index: 1;
     padding: 1rem;
     border: 4px solid var(--border-color);
-    background-color: rgb(255 255 255 / 0.24);
-    backdrop-filter: blur(8px);
+    background-color: color-mix(in srgb, var(--card-bg) 64%, white 36%);
+    backdrop-filter: blur(10px);
   }
 
   .dark .terminal-panel-inner {
@@ -316,6 +365,41 @@ canvas {
     content: ">";
     animation: menu-selector 900ms steps(3, end) infinite;
   }
+
+  /* Status helpers */
+  .status-success {
+    background-color: color-mix(in srgb, var(--accent-primary) 18%, transparent);
+    color: var(--accent-primary);
+    border: 1px solid color-mix(in srgb, var(--accent-primary) 28%, transparent);
+  }
+
+  .dark .status-success {
+    background-color: color-mix(in srgb, var(--accent-primary) 26%, transparent);
+    color: color-mix(in srgb, var(--accent-primary) 100%, white 8%);
+  }
+
+  .status-error {
+    background-color: color-mix(in srgb, var(--error) 16%, transparent);
+    color: var(--error);
+    border: 1px solid color-mix(in srgb, var(--error) 28%, transparent);
+  }
+
+  .dark .status-error {
+    background-color: color-mix(in srgb, var(--error) 26%, transparent);
+    color: var(--error);
+  }
+
+  .text-error { color: var(--error); }
+  .dark .text-error { color: var(--error); }
+
+  .btn-error {
+    background-color: var(--error);
+    color: var(--page-bg);
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+  }
+
+  .btn-error:hover { filter: brightness(0.9); }
 
   .player-stats {
     position: relative;
@@ -653,6 +737,167 @@ canvas {
     filter: brightness(1);
   }
 }
+
+/* =========================================
+   RETRO NES / MARIO UI THEME (scoped)
+   Apply by adding the `retro-theme` class to `html` or `body`.
+========================================= */
+
+.retro-theme {
+
+  /* =========================
+     DARK THEME
+  ========================= */
+
+  --dark-bg-primary: #001117;
+  --dark-bg-secondary: #121A2B;
+  --dark-surface: #18223A;
+  --dark-input-bg: #1F2A44;
+
+  --dark-mario-green: #00FF00;
+  --dark-bright-green: #66FF66;
+  --dark-pipe-green: #00AA00;
+
+  --dark-border: #00FF00;
+  --dark-accent-line: #00FF00;
+
+  --dark-heading: #F0FFE0;
+  --dark-text-primary: #E6F1FF;
+  --dark-text-secondary: #A8B5C7;
+  --dark-placeholder: #7E8A99;
+
+  --dark-error: #FF5252;
+
+  --dark-glow:
+    0 0 5px rgba(0,255,0,0.6),
+    0 0 15px rgba(0,255,0,0.3);
+
+
+  /* =========================
+     LIGHT THEME
+  ========================= */
+
+  --light-bg-primary: #E6F7FF;
+  --light-bg-secondary: #D4F5F5;
+  --light-surface: #FFFFFF;
+  --light-input-bg: #F2FAFF;
+
+  --light-mario-green: #00CC00;
+  --light-bright-green: #66FF66;
+  --light-pipe-green: #00AA00;
+
+  --light-border: #00CC00;
+  --light-accent-line: #00CC00;
+
+  --light-heading: #111111;
+  --light-text-primary: #1A2B3C;
+  --light-text-secondary: #556677;
+  --light-placeholder: #8899AA;
+
+  --light-warning: #FF8C00;
+
+  --light-glow:
+    0 0 5px rgba(0,204,0,0.35),
+    0 0 10px rgba(0,204,0,0.15);
+
+
+  /* =========================
+     UNIVERSAL COLORS
+  ========================= */
+
+  --retro-green: #00FF00;
+  --retro-bright-green: #66FF66;
+  --retro-blue: #1E90FF;
+  --retro-sky-blue: #66CCFF;
+  --retro-yellow: #FFD700;
+  --retro-red: #FF3B30;
+  --retro-orange: #FF8C00;
+  --retro-purple: #A020F0;
+  --retro-pink: #FF69B4;
+
+  /* Map some aliases to existing site vars for compatibility */
+  --page-bg-retro: var(--dark-bg-primary);
+  --card-bg-retro: var(--dark-surface);
+  --border-color-retro: var(--dark-border);
+  --accent-line-retro: var(--dark-accent-line);
+  --text-primary-retro: var(--dark-text-primary);
+  --heading-retro: var(--dark-heading);
+}
+
+/* Retro panel and utilities (component classes) */
+.retro-panel {
+  border: 3px solid var(--retro-green);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: var(--dark-glow);
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(6px);
+}
+
+.retro-heading {
+  font-size: 48px;
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: var(--heading-retro);
+  text-shadow:
+    4px 4px 0 rgba(0,0,0,0.5),
+    0 0 12px rgba(0,255,0,0.45);
+}
+
+.retro-input,
+.retro-textarea {
+  width: 100%;
+  background: var(--dark-input-bg);
+  border: 2px solid var(--retro-green);
+  color: var(--text-primary-retro);
+  padding: 16px;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.retro-input::placeholder,
+.retro-textarea::placeholder { color: var(--dark-placeholder); }
+
+.retro-input:focus,
+.retro-textarea:focus {
+  border-color: var(--retro-bright-green);
+  box-shadow:
+    0 0 10px rgba(102,255,102,0.4),
+    0 0 20px rgba(0,255,0,0.2);
+}
+
+.retro-button {
+  background: var(--retro-green);
+  color: black;
+  border: none;
+  padding: 14px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: 0.2s ease;
+  box-shadow: 0 0 8px rgba(0,255,0,0.45);
+}
+
+.retro-button:hover {
+  background: var(--retro-bright-green);
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(102,255,102,0.7);
+}
+
+.retro-label { display:block; margin-bottom:10px; font-size:12px; color:var(--heading-retro); letter-spacing:2px; }
+
+.retro-line { width:100%; height:4px; background:var(--retro-green); box-shadow:0 0 10px rgba(0,255,0,0.5); margin:20px 0; }
+
+.pixel-glow { image-rendering: pixelated; filter: drop-shadow(0 0 6px rgba(0,255,0,0.5)) drop-shadow(0 0 12px rgba(0,255,0,0.25)); }
+
+.light-theme .retro-panel { background: rgba(255,255,255,0.7); border-color: var(--light-border); box-shadow: var(--light-glow); }
+.light-theme .retro-heading { color: var(--light-heading); text-shadow: 3px 3px 0 rgba(255,255,255,0.4); }
+.light-theme .retro-input, .light-theme .retro-textarea { background: var(--light-input-bg); border-color: var(--light-border); color: var(--light-text-primary); }
+.light-theme .retro-input::placeholder, .light-theme .retro-textarea::placeholder { color: var(--light-placeholder); }
+.light-theme .retro-button { background: var(--light-mario-green); color: white; }
+.light-theme .retro-button:hover { background: var(--light-bright-green); }
+
 
 @keyframes cloudBanner {
   from {

@@ -1,7 +1,5 @@
 "use client"
 
-import { motion } from "framer-motion";
-
 const easeOut = [0.22, 1, 0.36, 1] as const;
 
 const profile = [
@@ -53,20 +51,12 @@ const item = {
 
 export default function PlayerStats() {
   return (
-    <motion.div
-      variants={container}
-      initial="hidden"
-      animate="show"
-      className="player-stats"
-    >
-      <motion.h2
-        variants={item}
-        className="border-b-4 border-[var(--border-color)] pb-2 text-center text-xl font-semibold tracking-[0.12em] text-[var(--text-color)] sm:text-2xl"
-      >
+    <div className="player-stats">
+      <h2 className="border-b-4 border-[var(--border-color)] pb-2 text-center text-xl font-semibold tracking-[0.12em] text-[var(--text-color)] sm:text-2xl">
         &gt; PLAYER_STATS
-      </motion.h2>
+      </h2>
 
-      <motion.div variants={item} className="mt-5 space-y-2 text-[var(--text-color)]">
+      <div className="mt-5 space-y-2 text-[var(--text-color)]">
         {profile.map(({ label, value }) => (
           <div
             key={label}
@@ -76,61 +66,48 @@ export default function PlayerStats() {
             <span className="min-w-0 break-words">{value}</span>
           </div>
         ))}
-      </motion.div>
+      </div>
 
-      <motion.div variants={item} className="mt-6">
+      <div className="mt-6">
         <h3 className="text-base font-semibold uppercase tracking-[0.14em] text-[var(--text-color)] sm:text-lg">
           Skills
         </h3>
-      </motion.div>
+      </div>
 
-      <motion.div variants={container} className="player-skills-grid mt-3">
+      <div className="player-skills-grid mt-3">
         {skillColumns.map((column, columnIndex) => (
           <div key={`column-${columnIndex}`} className="player-skills-column">
             {column.map(({ name, filled, total }, skillIndex) => {
               const index = (columnIndex * 3) + skillIndex;
 
               return (
-                <motion.div
+                <div
                   key={name}
-                  variants={item}
                   className="player-skill-row"
-                  transition={{
-                    duration: 0.45,
-                    delay: 0.34 + (index * 0.1),
-                    ease: easeOut,
-                  }}
                 >
                   <div className="player-skill-bar" aria-hidden="true">
                     {Array.from({ length: total }).map((_, segmentIndex) => {
                       const active = segmentIndex < filled;
 
                       return (
-                        <motion.span
+                        <span
                           key={`${name}-${segmentIndex}`}
-                          initial={{ opacity: 0, scaleX: 0.35 }}
-                          animate={{ opacity: 1, scaleX: 1 }}
-                          transition={{
-                            duration: 0.2,
-                            delay: 0.44 + (index * 0.1) + (segmentIndex * 0.045),
-                            ease: easeOut,
-                          }}
                           className={active ? "player-skill-segment is-active" : "player-skill-segment"}
                           role="presentation"
                         >
                           {active ? "▰" : "▱"}
-                        </motion.span>
+                        </span>
                       );
                     })}
                   </div>
                   <span className="player-skill-name truncate" title={`${name}: ${filled} of ${total}`}>{name}</span>
                   <span className="sr-only">{name}, {filled} of {total} proficiency</span>
-                </motion.div>
+                </div>
               );
             })}
           </div>
         ))}
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 }

@@ -1,8 +1,5 @@
 "use client"
 import React from 'react'
-import { motion } from 'framer-motion'
-
-const easeOut = [0.22, 1, 0.36, 1] as const;
 
 const Hero = () => {
   const ctaItems = [
@@ -22,18 +19,9 @@ const Hero = () => {
     <div className="flex justify-center">
       <ul className="flex w-full flex-col gap-4 text-center text-lg font-extrabold text-[var(--accent-primary)] sm:text-2xl md:flex-row md:justify-center">
         {ctaItems.map(({ href, label }, index) => (
-          <motion.li
+          <li
             key={label}
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.45,
-              delay: 0.32 + (index * 0.12),
-              ease: easeOut,
-            }}
-            whileHover={{ y: -3 }}
-            whileTap={{ scale: 0.98 }}
-            className="w-full md:w-auto"
+            className="w-full md:w-auto transition-transform duration-150 ease-out hover:-translate-y-1 active:scale-95"
           >
             <a
               href={href}
@@ -43,7 +31,7 @@ const Hero = () => {
             >
               <span className="terminal-cta-label">{label}</span>
             </a>
-          </motion.li>
+          </li>
         ))}
       </ul>
     </div>

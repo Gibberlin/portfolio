@@ -39,7 +39,7 @@ export default function Home() {
       >
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-3 top-20 h-36 animate-terminal-glow rounded-[1.75rem] bg-[radial-gradient(circle_at_top,rgba(30,238,12,0.18),transparent_68%)] blur-2xl sm:inset-x-4 sm:top-24 sm:h-48 md:inset-x-8"
+          className="pointer-events-none absolute inset-x-3 top-20 h-36 rounded-[1.75rem] bg-[radial-gradient(circle_at_top,rgba(30,238,12,0.18),transparent_68%)] blur-2xl sm:inset-x-4 sm:top-24 sm:h-48 md:inset-x-8"
         />
         <section className="terminal-reveal terminal-delay-1 w-full">
           <Type />

@@ -7,7 +7,8 @@ type InitialLoadingGateProps = {
   children: React.ReactNode;
 };
 
-const LOADING_SCREEN_MIN_DURATION_MS = 2400;
+// Reduce initial loading gate duration to minimize animation interruption issues
+const LOADING_SCREEN_MIN_DURATION_MS = 300;
 
 export default function InitialLoadingGate({ children }: InitialLoadingGateProps) {
   const [showLoader, setShowLoader] = useState(true);

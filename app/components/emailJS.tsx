@@ -126,7 +126,7 @@ export default function EmailForm() {
           className="surface-input w-full rounded border p-3 text-base disabled:opacity-50 disabled:cursor-not-allowed"
         />
         {errors.user_name && (
-          <p id="user_name-error" className="mt-1 text-xs text-red-600 dark:text-red-400">
+          <p id="user_name-error" className="mt-1 text-xs text-error">
             {errors.user_name}
           </p>
         )}
@@ -149,7 +149,7 @@ export default function EmailForm() {
           className="surface-input w-full rounded border p-3 text-base disabled:opacity-50 disabled:cursor-not-allowed"
         />
         {errors.user_email && (
-          <p id="user_email-error" className="mt-1 text-xs text-red-600 dark:text-red-400">
+          <p id="user_email-error" className="mt-1 text-xs text-error">
             {errors.user_email}
           </p>
         )}
@@ -176,7 +176,7 @@ export default function EmailForm() {
           className="surface-input h-32 w-full rounded border p-3 text-base disabled:opacity-50 disabled:cursor-not-allowed resize-none"
         />
         {errors.message && (
-          <p id="message-error" className="mt-1 text-xs text-red-600 dark:text-red-400">
+          <p id="message-error" className="mt-1 text-xs text-error">
             {errors.message}
           </p>
         )}
@@ -185,7 +185,7 @@ export default function EmailForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="min-h-11 w-full rounded bg-[var(--accent-primary)] p-3 text-base font-semibold text-black transition-all hover:shadow-lg hover:shadow-[var(--accent-primary)]/30 disabled:opacity-60 disabled:cursor-not-allowed focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-primary)]"
+        className="min-h-11 w-full rounded bg-[var(--accent-primary)] p-3 text-base font-semibold text-[var(--page-bg)] transition-all hover:shadow-lg hover:shadow-[var(--accent-primary)]/30 disabled:opacity-60 disabled:cursor-not-allowed focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-primary)]"
       >
         {isSubmitting ? (
           <span className="flex items-center justify-center gap-2">
@@ -200,13 +200,13 @@ export default function EmailForm() {
       {/* Status Messages */}
       <div aria-live="polite" aria-atomic="true" role="status" className="min-h-6 space-y-2">
         {submitStatus === 'success' && (
-          <div className="flex items-center gap-2 rounded bg-green-600/20 p-3 text-sm text-green-600 dark:bg-green-600/30 dark:text-green-400 border border-green-600/30">
+          <div className="flex items-center gap-2 rounded status-success p-3 text-sm">
             <span>✓</span>
             <p>Message sent successfully! I'll get back to you soon.</p>
           </div>
         )}
         {submitStatus === 'error' && errorMessage && (
-          <div className="flex items-start gap-2 rounded bg-red-600/20 p-3 text-sm text-red-600 dark:bg-red-600/30 dark:text-red-400 border border-red-600/30">
+          <div className="flex items-start gap-2 rounded status-error p-3 text-sm">
             <span className="mt-0.5">⚠</span>
             <div>
               <p className="font-semibold">Failed to send message</p>

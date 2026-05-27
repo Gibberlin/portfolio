@@ -1,6 +1,5 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -117,25 +116,9 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
   const spdx = details?.license?.spdx_id;
   const licenseLabel = spdx && spdx !== "NOASSERTION" ? spdx : "No license";
 
-  const backgroundVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 },
-    exit: { opacity: 0 },
-  };
-
-  const contentVariants = {
-    hidden: { opacity: 0, scale: 0.95 },
-    visible: { opacity: 1, scale: 1 },
-    exit: { opacity: 0, scale: 0.95 },
-  };
-
   const modal = (
     <>
-      <motion.div
-        variants={backgroundVariants}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
+      <div
         onClick={onClose}
         style={{
           position: 'fixed',
@@ -160,11 +143,7 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
           pointerEvents: 'auto',
         }}
       >
-        <motion.div
-          variants={contentVariants}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
+        <div
           onClick={e => e.stopPropagation()}
           className="terminal-panel overflow-y-auto rounded-lg w-full h-full"
           style={{
@@ -229,7 +208,7 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
                 href={repo.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex flex-1 items-center justify-center gap-1 border-4 border-[var(--border-color)] bg-[var(--accent-primary)] px-3 py-2 text-xs font-extrabold uppercase tracking-[0.12em] text-black transition-transform duration-150 ease-out hover:-translate-y-0.5 focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-primary)] sm:text-sm sm:px-4 sm:py-3 sm:gap-2 sm:tracking-[0.18em]"
+                className="inline-flex flex-1 items-center justify-center gap-1 border-4 border-[var(--border-color)] bg-[var(--accent-primary)] px-3 py-2 text-xs font-extrabold uppercase tracking-[0.12em] text-[var(--page-bg)] transition-transform duration-150 ease-out hover:-translate-y-0.5 focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-primary)] sm:text-sm sm:px-4 sm:py-3 sm:gap-2 sm:tracking-[0.18em]"
               >
                 GitHub →
               </a>
@@ -242,15 +221,10 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
               </button>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </>
   );
 
-  return createPortal(
-    <AnimatePresence mode="wait">
-      {isOpen ? modal : null}
-    </AnimatePresence>,
-    document.body
-  );
+  return createPortal(isOpen ? modal : null, document.body);
 }

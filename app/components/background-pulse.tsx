@@ -2,24 +2,15 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useReducedMotion } from "framer-motion";
 
 export default function BackgroundPulse() {
   const pathname = usePathname();
-  const reduceMotion = useReducedMotion();
   const [pulseKey, setPulseKey] = useState(0);
 
+  // Keep pulse key changes so the background-pulse can restart when pathname changes.
   useEffect(() => {
-    if (reduceMotion) {
-      return;
-    }
-
     setPulseKey((current) => current + 1);
-  }, [pathname, reduceMotion]);
-
-  if (reduceMotion) {
-    return null;
-  }
+  }, [pathname]);
 
   return (
     <div

@@ -7,6 +7,7 @@ import {Silkscreen} from "next/font/google"
 import AnalyticsWrapper from "@/app/components/analytics";
 import RouteTransition from "@/app/components/route-transition";
 import BackgroundPulse from "@/app/components/background-pulse";
+import AnimationErrorBoundary from "@/app/components/AnimationErrorBoundary";
 import InitialLoadingGate from "@/app/components/initial-loading-gate";
 
 const silkscreen = Silkscreen({
@@ -93,7 +94,9 @@ export default function RootLayout({
           <BackgroundPulse />
           <div className="relative z-10 flex min-h-screen flex-col md:flex-row">
             <Navbar/>
-            <RouteTransition>{children}</RouteTransition>
+            <AnimationErrorBoundary>
+              <RouteTransition>{children}</RouteTransition>
+            </AnimationErrorBoundary>
           </div>
         </div>
         </InitialLoadingGate>

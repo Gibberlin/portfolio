@@ -34,7 +34,7 @@ export default function About() {
       </Head>
       <main className="flex min-h-[calc(100vh-4rem)] w-full flex-col px-3 pb-8 pt-24 sm:px-4 sm:pt-28 md:min-h-screen md:p-10">
         <div className="m-auto w-full max-w-5xl">
-          <div className="bg-white/70 p-4 backdrop-blur-md border-4 border-[var(--border-color)] dark:bg-[#0F172A]/70 sm:p-6 md:p-8">
+          <div className="bg-[var(--page-bg)]/70 p-4 backdrop-blur-md border-4 border-[var(--border-color)] dark:bg-[#0F172A]/70 sm:p-6 md:p-8">
             <h1 className="mb-6 border-b-4 border-[var(--border-color)] pb-2 text-center text-3xl font-bold text-[var(--text-color)] sm:text-4xl md:mb-8 md:text-5xl">
               About Me
             </h1>
