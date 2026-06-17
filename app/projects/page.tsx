@@ -239,7 +239,7 @@ export default function Projects() {
   <meta name="twitter:image" content="https://syeds.in/images/preview.png" />
 </Head>
 
-        <div className="w-full border-4 border-[var(--border-color)] bg-[var(--page-bg)]/70 p-4 backdrop-blur-md dark:bg-[#0F172A]/70 sm:p-6 md:p-10 lg:p-16">
+        <div className=" w-full border-4 border-[var(--border-color)] bg-white/70 p-4 backdrop-blur-md dark:bg-[#0F172A]/70 sm:p-6 md:p-10 lg:p-16">
           <div className="max-w-7xl mx-auto">
             <h1 className="mb-6 border-b-4 border-[var(--border-color)] pb-2 text-3xl font-bold text-[var(--text-color)] sm:text-4xl md:mb-8 md:text-5xl">
               My Projects

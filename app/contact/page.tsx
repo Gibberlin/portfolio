@@ -36,8 +36,8 @@ export default function SocialsPage() {
   <meta name="twitter:image" content="https://syeds.in/images/preview.png" />
 </Head>
 
-      <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 w-full">
-          <div className="max-w-3xl mx-auto p-5 md:p-20 bg-[var(--card-bg)]/70 backdrop-blur-sm border-4 site-border">
+      <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 w-full ">
+          <div className="max-w-3xl mx-auto p-5 md:p-20 bg-white/70 backdrop-blur-sm border-4 site-border">
           <h1 className="text-4xl md:text-7xl font-bold site-heading mb-12 border-b-4 site-border">
             Let&apos;s Connect!
           </h1>
