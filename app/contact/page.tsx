@@ -37,8 +37,8 @@ export default function SocialsPage() {
 </Head>
 
       <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 w-full ">
-          <div className="max-w-3xl mx-auto p-5 md:p-20 bg-white/70 backdrop-blur-sm border-4 site-border">
-          <h1 className="text-4xl md:text-7xl font-bold site-heading mb-12 border-b-4 site-border">
+          <div className="max-w-3xl mx-auto p-5 md:p-20 bg-white/70 dark:bg-[#0F172A]/70 backdrop-blur-sm border-4 site-border">
+          <h1 className="text-4xl md:text-7xl font-bold site-heading mb-12 border-b-4 site-border color-[var(--accent-line)] pb-4">
             Let&apos;s Connect!
           </h1>
 
