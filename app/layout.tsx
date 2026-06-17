@@ -8,6 +8,7 @@ import AnalyticsWrapper from "@/app/components/analytics";
 import RouteTransition from "@/app/components/route-transition";
 import BackgroundPulse from "@/app/components/background-pulse";
 import AnimationErrorBoundary from "@/app/components/AnimationErrorBoundary";
+import ErrorBoundary from "@/app/components/ErrorBoundary";
 import InitialLoadingGate from "@/app/components/initial-loading-gate";
 
 const silkscreen = Silkscreen({
@@ -79,26 +80,28 @@ export default function RootLayout({
         </a>
       <ThemeProvider defaultTheme="dark" attribute="class" enableSystem >
         <InitialLoadingGate>
-        <div className="relative min-h-screen overflow-clip">
-          <div
-            aria-hidden="true"
-            className="background-scene pointer-events-none fixed inset-0 z-0"
-            style={{
-              backgroundColor: "var(--background)",
-            }}
-          />
-          <div
-            aria-hidden="true"
-            className="clouds-drift"
-          />
-          <BackgroundPulse />
-          <div className="relative z-10 flex min-h-screen flex-col md:flex-row">
-            <Navbar/>
-            <AnimationErrorBoundary>
-              <RouteTransition>{children}</RouteTransition>
-            </AnimationErrorBoundary>
+        <ErrorBoundary>
+          <div className="relative min-h-screen overflow-clip">
+            <div
+              aria-hidden="true"
+              className="background-scene pointer-events-none fixed inset-0 z-0"
+              style={{
+                backgroundColor: "var(--background)",
+              }}
+            />
+            <div
+              aria-hidden="true"
+              className="clouds-drift"
+            />
+            <BackgroundPulse />
+            <div className="relative z-10 flex min-h-screen flex-col md:flex-row">
+              <Navbar/>
+              <AnimationErrorBoundary>
+                <RouteTransition>{children}</RouteTransition>
+              </AnimationErrorBoundary>
+            </div>
           </div>
-        </div>
+        </ErrorBoundary>
         </InitialLoadingGate>
       </ThemeProvider>
       </body>

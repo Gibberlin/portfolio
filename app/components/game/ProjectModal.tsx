@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 
 interface GitHubRepo {
@@ -41,16 +41,79 @@ function formatRelativeDays(dateString: string) {
 }
 
 export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
+  const modalRef = useRef<HTMLDivElement>(null);
+  const previousActiveElement = useRef<HTMLElement | null>(null);
+
+  // Get all focusable elements
+  const getFocusableElements = useCallback(() => {
+    if (!modalRef.current) return [];
+    const selector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    return Array.from(modalRef.current.querySelectorAll(selector)) as HTMLElement[];
+  }, []);
+
+  // Trap focus within modal
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      onClose();
+      return;
+    }
+
+    if (e.key !== 'Tab') return;
+
+    const focusableElements = getFocusableElements();
+    if (focusableElements.length === 0) return;
+
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+    const activeElement = document.activeElement as HTMLElement;
+
+    if (e.shiftKey) {
+      // Shift + Tab
+      if (activeElement === firstElement) {
+        e.preventDefault();
+        lastElement.focus();
+      }
+    } else {
+      // Tab
+      if (activeElement === lastElement) {
+        e.preventDefault();
+        firstElement.focus();
+      }
+    }
+  }, [getFocusableElements, onClose]);
+
+  // Scroll lock and focus trap setup
   useEffect(() => {
     if (isOpen) {
+      // Store the previously focused element
+      previousActiveElement.current = document.activeElement as HTMLElement;
+      
+      // Lock body scroll
       document.body.style.overflow = 'hidden';
+
+      // Add keyboard event listener
+      window.addEventListener('keydown', handleKeyDown);
+
+      // Focus first focusable element
+      setTimeout(() => {
+        const focusableElements = getFocusableElements();
+        if (focusableElements.length > 0) {
+          focusableElements[0].focus();
+        }
+      }, 0);
+
+      return () => {
+        window.removeEventListener('keydown', handleKeyDown);
+        document.body.style.overflow = 'unset';
+      };
     } else {
+      // Restore scroll and focus
       document.body.style.overflow = 'unset';
+      if (previousActiveElement.current && previousActiveElement.current.focus) {
+        previousActiveElement.current.focus();
+      }
     }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isOpen]);
+  }, [isOpen, handleKeyDown, getFocusableElements]);
 
   const [details, setDetails] = useState<GitHubRepoDetails | null>(null);
   const [detailsLoading, setDetailsLoading] = useState(false);
@@ -120,6 +183,7 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
     <>
       <div
         onClick={onClose}
+        role="presentation"
         style={{
           position: 'fixed',
           top: 0,
@@ -132,14 +196,19 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
         }}
       />
       <div
+        ref={modalRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={`modal-title-${repo?.name || 'project'}`}
         style={{
           position: 'fixed',
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
           zIndex: 50,
-          width: 'min(90vw, 48rem)',
-          maxHeight: '90vh',
+          width: 'min(95vw, min(100vw - 2rem, 48rem))',
+          maxHeight: 'min(95vh, calc(100vh - 2rem))',
+          maxWidth: '48rem',
           pointerEvents: 'auto',
         }}
       >
@@ -149,22 +218,25 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
           style={{
             height: '100%',
             width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
           }}
         >
           <div className="terminal-panel-inner">
-            <div className="flex items-start justify-between gap-4 mb-4">
+            <div className="flex items-start justify-between gap-2 mb-4 sm:gap-4">
               <div className="min-w-0">
                 <p className="surface-copy-muted text-[0.68rem] uppercase tracking-[0.16em] sm:text-xs sm:tracking-[0.24em]">
                   {detailsLoading ? "Fetching intel…" : "Project intel"}
                 </p>
-                <h2 className="mt-2 break-words text-lg font-bold tracking-[0.04em] text-[var(--text-color)] sm:text-2xl sm:tracking-[0.08em]">
+                <h2 id={`modal-title-${repo?.name || 'project'}`} className="mt-2 break-words text-base font-bold tracking-[0.04em] text-[var(--text-color)] sm:text-lg md:text-2xl sm:tracking-[0.08em]">
                   📦 {repo.name}
                 </h2>
               </div>
               <button
                 type="button"
                 onClick={onClose}
-                className="shrink-0 rounded border-2 border-[var(--border-color)] bg-[color-mix(in_srgb,var(--card-bg)_86%,transparent)] px-2 py-1 text-xs font-bold text-[var(--text-color)] transition-transform duration-150 ease-out hover:-translate-y-0.5 focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-primary)]"
+                aria-label="Close project details"
+                className="shrink-0 flex items-center justify-center min-w-[2.5rem] min-h-[2.5rem] sm:min-w-[2.75rem] sm:min-h-[2.75rem] rounded border-2 border-[var(--border-color)] bg-[color-mix(in_srgb,var(--card-bg)_86%,transparent)] px-2 py-1 text-sm sm:text-base font-bold text-[var(--text-color)] transition-transform duration-150 ease-out hover:-translate-y-0.5 focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-primary)]"
               >
                 ✕
               </button>

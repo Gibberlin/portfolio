@@ -347,24 +347,29 @@ export default function Projects() {
                   }`}
                 >
                   All
-                <button
-                    onClick={() => void fetchRepos()}
-                    className="mt-3 px-4 py-2 bg-[var(--accent-primary)] text-[var(--page-bg)] rounded font-semibold hover:shadow-lg transition-all"
-                  >
-                    {loading ? 'Retrying...' : 'Try again'}
                 </button>
+                {Array.from(
+                  new Set(
+                    repos
+                      .map((r) => r.language)
+                      .filter((lang): lang is string => lang !== null)
+                  )
+                ).map((lang) => (
+                  <button
+                    key={lang}
+                    onClick={() => setFilter(lang)}
+                    className={`px-4 py-2 border-4 transition-colors ${
                       filter === lang
                         ? 'bg-[var(--accent-primary)] text-[var(--page-bg)] border-[var(--border-color)]'
                         : 'bg-[var(--card-bg)] text-[var(--text-color)] border-[var(--border-color)] hover:bg-[var(--accent-secondary)]'
                     }`}
                   >
                     {lang}
-                  <button
-                    onClick={() => void fetchRepos()}
-                    className="mt-3 px-4 py-2 bg-[var(--accent-primary)] text-[var(--page-bg)] rounded font-semibold hover:shadow-lg transition-all"
-                  >
-                    {loading ? 'Retrying...' : 'Try again'}
                   </button>
+                ))}
+              </div>
+
+              {errorMessage && (
               <div className="border-4 status-error p-4 text-sm space-y-3 rounded">
                 <div className="flex items-start gap-3">
                   <span className="text-xl mt-0.5">⚠</span>
@@ -381,7 +386,7 @@ export default function Projects() {
                   {loading ? 'Retrying...' : 'Try again'}
                 </button>
               </div>
-            ) : null}
+            )}
 
             {/* Results Info */}
             {!errorMessage && repos.length > 0 && (
@@ -424,6 +429,7 @@ export default function Projects() {
                 </button>
               </div>
             )}
+            </div>
 
             {/* Projects Grid */}
             {sortedRepos.length > 0 && (

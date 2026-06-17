@@ -5,6 +5,28 @@ import { useEffect, useMemo, useRef, useState } from "react";
 const TRACKS = ["/music/loading1.mp3", "/music/loading2.mp3", "/music/loading3.mp3"] as const;
 const STORAGE_KEY = "portfolio_music_enabled";
 
+// Safe localStorage access utility
+const safeLocalStorage = {
+  getItem: (key: string): string | null => {
+    try {
+      if (typeof window === "undefined") return null;
+      return window.localStorage.getItem(key);
+    } catch (e) {
+      console.warn(`Failed to read localStorage key "${key}":`, e);
+      return null;
+    }
+  },
+  setItem: (key: string, value: string): void => {
+    try {
+      if (typeof window === "undefined") return;
+      window.localStorage.setItem(key, value);
+    } catch (e) {
+      console.warn(`Failed to write localStorage key "${key}":`, e);
+      // Silently fail - user experience continues without persistence
+    }
+  },
+};
+
 export default function NavMusicButton() {
   const [enabled, setEnabled] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -15,7 +37,7 @@ export default function NavMusicButton() {
   }, []);
 
   useEffect(() => {
-    const stored = typeof window !== "undefined" ? window.localStorage.getItem(STORAGE_KEY) : null;
+    const stored = safeLocalStorage.getItem(STORAGE_KEY);
     const nextEnabled = stored === "true";
     setEnabled(nextEnabled);
   }, []);
@@ -38,7 +60,7 @@ export default function NavMusicButton() {
       audio.pause();
     }
 
-    window.localStorage.setItem(STORAGE_KEY, enabled ? "true" : "false");
+    safeLocalStorage.setItem(STORAGE_KEY, enabled ? "true" : "false");
   }, [enabled, track]);
 
   useEffect(() => {
@@ -57,7 +79,7 @@ export default function NavMusicButton() {
       aria-label={enabled ? "Mute music" : "Play music"}
       aria-pressed={enabled}
       onClick={() => setEnabled((prev) => !prev)}
-      className="inline-flex h-10 w-10 items-center justify-center rounded-full border-2 border-[var(--nav-button-border)] bg-[var(--nav-button-bg)] text-[var(--nav-text)] transition-transform duration-150 ease-out hover:-translate-y-0.5 focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-primary)] sm:h-11 sm:w-11"
+      className="inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-[var(--nav-button-border)] bg-[var(--nav-button-bg)] text-[var(--nav-text)] transition-transform duration-150 ease-out hover:-translate-y-0.5 focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-primary)] sm:h-12 sm:w-12"
     >
       <span className="text-lg leading-none" aria-hidden="true">
         {enabled ? "♫" : "♪"}

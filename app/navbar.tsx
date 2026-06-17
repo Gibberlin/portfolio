@@ -45,7 +45,7 @@ export default function Navbar() {
             >
                 <h1 className="col-start-2 row-start-1 flex w-auto shrink-0 items-center justify-center self-center md:w-full">
                     <Link href="/" aria-label="Home">
-                        <Image src={alien} alt="" width={10} height={15} className="m-0.5 p-1 size-10 sm:m-1 sm:size-12 md:m-4 md:size-44 lg:size-48" />
+                        <Image src={alien} alt="Syed Yashin Hussain — Web Developer" width={10} height={15} className="m-0.5 p-1 size-10 sm:m-1 sm:size-12 md:m-4 md:size-44 lg:size-48" />
                     </Link>
                 </h1>
 
@@ -75,7 +75,7 @@ export default function Navbar() {
                         type="button"
                         aria-label={themeLabel}
                         aria-pressed={mounted ? isDark : undefined}
-                        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full p-2 transition-transform duration-300 ease-out hover:rotate-12 focus-visible:rotate-12 sm:h-11 sm:w-11 md:h-14 md:w-14 md:p-3 ${toggleRotationClass}`}
+                        className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full p-2 transition-transform duration-300 ease-out hover:rotate-12 focus-visible:rotate-12 sm:h-12 sm:w-12 md:h-14 md:w-14 md:p-3 ${toggleRotationClass}`}
                         style={{
                             backgroundColor: "var(--nav-button-bg)",
                         }}

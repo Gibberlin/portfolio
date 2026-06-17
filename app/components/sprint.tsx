@@ -8,7 +8,7 @@ export default function Sprint() {
       <div className="runner-ufo-track">
         <Image
           src="/images/alien.gif"
-          alt=""
+          alt="Floating alien UFO animation"
           width={72}
           height={72}
           className="runner-ufo"
@@ -23,7 +23,7 @@ export default function Sprint() {
             <div className="runner">
               <Image
                 src="/images/rider.png"
-                alt=""
+                alt="Running character on motorcycle"
                 width={120}
                 height={90}
                 className="runner-image"
